@@ -1,3 +1,11 @@
+# How to pull from upstream repo
+```
+git fetch upstream
+git checkout main
+git merge upstream/main  # or: git rebase upstream/main
+git push origin main
+```
+
 # appbench
 
 This benchmark suite was used in the HeteroOS study to analyze how heterogeneous memory (with different performance characteristics) impacts cloud applications. The suite mixes CPU-, memory-, and IO-intensive workloads.
