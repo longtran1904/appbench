@@ -33,8 +33,9 @@ flush() {
 echo "==> starting redis-server on $HOST:$PORT"
 flush
 # start server in foreground, background the process; capture PID
-${APPPREFIX:+$APPPREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
-  --bind "$HOST" --port "$PORT" --daemonize no >"$SERVER_LOG" 2>&1 &
+# echo the exact command with variables expanded, then run it
+echo "==> redis-server: ${APPPREFIX:+$APPPREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $PORT --daemonize no >$SERVER_LOG 2>&1 &"
+${APPPREFIX:+$APPPREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} --bind "$HOST" --port "$PORT" --daemonize no >"$SERVER_LOG" 2>&1 &
 SRV_PID=$!
 
 # wait until it answers PING (max ~10s)
@@ -44,6 +45,7 @@ for i in {1..50}; do
 done
 
 echo "==> running redis-benchmark (logging to $OUTPUT)"
+echo "/usr/bin/time -f 'TOTAL WALL CLOCK TIME(SEC): %e' ${APPPREFIX:+$APPPREFIX }\"$REDIS_BENCH\" -t \"$TESTS\" -n \"$REQUESTS\" -r \"$KEYSPACE\" -c \"$CLIENTS\" -P \"$PIPELINE\" -d \"$DATASIZE\" -q -h \"$HOST\" -p \"$PORT\" >>\"$OUTPUT\" 2>&1"
 /usr/bin/time -f 'TOTAL WALL CLOCK TIME(SEC): %e' \
   ${APPPREFIX:+$APPPREFIX }"$REDIS_BENCH" \
    -t "$TESTS" -n "$REQUESTS" -r "$KEYSPACE" -c "$CLIENTS" -P "$PIPELINE" -d "$DATASIZE" \

@@ -28,6 +28,17 @@ RUNAPP(){
   "$APPBASE/run.sh" "$RUNNOW" "$OUTPUTDIR/$APP" &> "$OUTPUTDIR/$APP"
 }
 
+RUNAPP_NEW(){
+  echo "$APPBASE"
+  cd "$APPBASE" || exit 2
+  if [[ ! -x "$APPBASE/run.sh" ]]; then
+    echo "ERROR: run.sh not found or not executable in $APPBASE" >&2
+    exit 3
+  fi
+  # Per-app log goes to $OUTPUTDIR/$APP (stdout+stderr)
+  "$APPBASE/run.sh" "$RUNNOW" "$OUTPUTDIR/$APP" &> "$OUTPUTDIR/$APP"
+}
+
 # ---- embed graph500 run.sh if missing (no overwrite) ----
 embed_graph500_runsh() {
   local gdir="$BASE/graph500/src"
@@ -137,6 +148,13 @@ run_redis(){
   RUNAPP
 }
 
+run_redis_new(){
+    APPBASE="$BASE/redis-3.0.0/src"
+    APP="redis_new"
+    echo "running $APP..."
+    RUNAPP_NEW
+}
+
 run_leveldb(){
   APPBASE="$BASE/leveldb"
   APP="leveldb"
@@ -167,6 +185,7 @@ if [[ -n "$APP_ARG" ]]; then
     metis)         run_metis ;;
     graphchi)      run_graphchi ;;
     redis)         run_redis ;;
+    redis_new)     run_redis_new ;;
     leveldb)       run_leveldb ;;
 #    xstream* )     run_xstream ;;
     *)
