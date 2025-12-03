@@ -1,0 +1,66 @@
+sudo cgexec -g cpu,memory:lht21-group-redis /usr/bin/time -f 'TOTAL WALL CLOCK TIME(SEC): %e' 
+        "/mnt/appbench/redis-3.0.0/src/redis-benchmark" -t "get,set" -n "20000" -r "1000000" -c "1" 
+        -P "64" -d "64" -h "127.0.0.1" -p "6500" >>"/mnt/appbench/output/redis" 2>&1
+SET: 0.00SET: 0.00SET: 127.74SET: 170.44SET: 191.62SET: 204.47SET: 213.05SET: 219.18SET: 191.81SET: 198.85SET: 204.47SET: 209.07SET: 212.98SET: 216.28SET: 219.12SET: 221.57SET: 223.72SET: 225.62SET: 227.30SET: 215.35SET: 217.38SET: 219.18SET: 220.81SET: 222.34SET: 223.74SET: 225.03SET: 226.22SET: 227.32SET: 228.28SET: 229.20SET: 230.09SET: 222.65SET: 223.66SET: 224.62SET: 225.54SET: 226.41SET: 227.23SET: 228.00SET: 228.74SET: 229.44SET: 223.69SET: 224.47SET: 225.22SET: 225.94SET: 226.62SET: 227.27SET: 227.90SET: 228.49SET: 229.03SET: 229.58SET: 230.09SET: 230.59SET: 231.06SET: 231.53SET: 231.99SET: 232.42SET: 228.28SET: 228.76SET: 229.23SET: 229.67SET: 230.11SET: 230.53SET: 230.94SET: 227.27SET: 227.72SET: 228.14SET: 228.54SET: 228.95SET: 229.35SET: 229.74SET: 230.11SET: 230.47SET: 227.28SET: 227.67SET: 228.05SET: 228.41SET: 228.76SET: 229.12SET: 229.46SET: 229.80SET: 230.12SET: 227.29SET: 227.62SET: 227.97SET: 228.29SET: 228.60SET: 228.91SET: 229.22SET: 229.53SET: 229.81SET: 230.09SET: 227.57SET: 227.87SET: 228.17SET: 228.46SET: 228.75SET: 229.03SET: 229.30SET: 229.57SET: 229.83SET: 230.10SET: 230.35SET: 230.60SET: 230.84SET: 231.08SET: 231.32SET: 231.55SET: 231.78SET: 232.00SET: 232.22SET: 232.43SET: 232.64SET: 232.85SET: 233.05SET: 231.01SET: 231.22SET: 231.43SET: 231.64SET: 231.84SET: 232.04SET: 232.24SET: 232.43SET: 230.52SET: 230.73SET: 230.94SET: 231.14SET: 231.33SET: 231.52SET: 231.71SET: 231.90SET: 232.08SET: 230.31SET: 230.51SET: 230.70SET: 230.88SET: 231.07SET: 231.25SET: 231.43SET: 229.75SET: 229.94SET: 230.12SET: 230.31SET: 230.49SET: 230.67SET: 230.84SET: 231.01SET: 231.17SET: 229.60SET: 229.78SET: 229.96SET: 230.12SET: 230.30SET: 230.46SET: 230.63SET: 230.80SET: 230.96SET: 231.12SET: 229.65SET: 229.81SET: 229.97SET: 230.14SET: 230.30SET: 230.45SET: 230.61SET: 230.77SET: 230.91SET: 229.52SET: 229.68SET: 229.83SET: 229.99SET: 230.14SET: 230.29SET: 230.44SET: 230.58SET: 230.73SET: 229.41SET: 229.56SET: 229.71SET: 229.85SET: 230.00SET: 230.14SET: 230.29SET: 230.43SET: 230.57SET: 229.31SET: 229.45SET: 229.59SET: 229.73SET: 229.87SET: 230.01SET: 230.14SET: 230.28SET: 230.41SET: 230.54SET: 230.67SET: 230.80SET: 230.92SET: 231.05SET: 231.18SET: 231.30SET: 231.43SET: 231.55SET: 231.67SET: 231.79SET: 231.91SET: 230.78SET: 230.90SET: 231.02SET: 231.14SET: 231.25SET: 231.37SET: 231.48SET: 231.60SET: 231.71SET: 231.82SET: 231.93SET: 232.04SET: 232.15SET: 232.26SET: 232.37SET: 231.31SET: 231.42SET: 231.53SET: 231.63====== SET ======
+  20000 requests completed in 55.84 seconds
+  1 parallel clients
+  64 bytes payload
+  keep alive: 1
+
+35.04% <= 221 milliseconds
+35.37% <= 254 milliseconds
+35.69% <= 255 milliseconds
+38.24% <= 256 milliseconds
+42.08% <= 257 milliseconds
+46.88% <= 258 milliseconds
+47.85% <= 259 milliseconds
+50.72% <= 260 milliseconds
+52.97% <= 262 milliseconds
+53.60% <= 263 milliseconds
+53.92% <= 265 milliseconds
+54.56% <= 266 milliseconds
+54.88% <= 267 milliseconds
+55.53% <= 268 milliseconds
+55.85% <= 270 milliseconds
+56.49% <= 271 milliseconds
+56.81% <= 272 milliseconds
+57.44% <= 273 milliseconds
+58.08% <= 274 milliseconds
+59.69% <= 275 milliseconds
+60.65% <= 276 milliseconds
+63.21% <= 277 milliseconds
+70.57% <= 278 milliseconds
+77.29% <= 279 milliseconds
+83.68% <= 280 milliseconds
+87.21% <= 281 milliseconds
+91.04% <= 282 milliseconds
+92.96% <= 283 milliseconds
+94.57% <= 284 milliseconds
+95.21% <= 286 milliseconds
+95.53% <= 289 milliseconds
+96.17% <= 291 milliseconds
+96.49% <= 298 milliseconds
+96.81% <= 299 milliseconds
+97.12% <= 301 milliseconds
+97.44% <= 310 milliseconds
+97.76% <= 316 milliseconds
+98.08% <= 320 milliseconds
+98.40% <= 329 milliseconds
+98.72% <= 345 milliseconds
+99.04% <= 351 milliseconds
+99.36% <= 352 milliseconds
+99.68% <= 357 milliseconds
+100.00% <= 357 milliseconds
+358.14 requests per second
+
+====== GET ======
+  20000 requests completed in 0.13 seconds
+  1 parallel clients
+  64 bytes payload
+  keep alive: 1
+
+100.00% <= 0 milliseconds
+155038.77 requests per second
+
+
+TOTAL WALL CLOCK TIME(SEC): 55.98
