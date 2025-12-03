@@ -12,16 +12,16 @@ REDIS_CONF="${REDIS_CONF:-$CODEBASE/redis-3.0.0/redis.conf}"
 # --- run params (env overrides) ---
 HOST="${HOST:-127.0.0.1}"
 PORT="${PORT:-6500}"
-KEYSPACE="${KEYSPACE:-2000000}"    # -r
-REQUESTS="${REQUESTS:-4000000}"   # -n
-CLIENTS="${CLIENTS:-200}"          # -c
-PIPELINE="${PIPELINE:-64}"        # -P
-DATASIZE="${DATASIZE:-2048}"      # -d (bytes)
-TESTS="${TESTS:-get,set}"         # -t
+KEYSPACE="${KEYSPACE:-2000000}"     # -r (2 million keys)
+REQUESTS="${REQUESTS:-4000000}"     # -n
+CLIENTS="${CLIENTS:-32}"             # -c
+PIPELINE="${PIPELINE:-64}"          # -P
+DATASIZE="${DATASIZE:-2048}"        # -d (bytes)
+TESTS="${TESTS:-get,set}"           # -t
 #OUTPUT="${OUTPUT:-${OUTPUTDIR:-$PWD}/redis_bench_$(date +%Y%m%d-%H%M%S).log}"
 OUTPUT="${OUTPUT:-${OUTPUTDIR:-$PWD}/redis}"
 APPPREFIX="${APPPREFIX:-}"        # e.g., $QUARTZSCRIPTS/runenv.sh
-FLUSH="${FLUSH:-0}"               # set FLUSH=1 to drop caches (needs sudo)
+FLUSH="${FLUSH:-1}"               # set FLUSH=1 to drop caches (needs sudo)
 
 # --- cgroup params ---
 CG_ENABLE="${CG_ENABLE:-true}"    # set to "true" to enable cgroups
@@ -72,6 +72,10 @@ cg_make_grp "redis" "$MEM" "$CPUS"
 
 mkdir -p "$(dirname "$OUTPUT")"
 SERVER_LOG="${OUTPUT%.log}.server.log"
+echo "Server log: $SERVER_LOG"
+echo "Benchmark output: $OUTPUT"
+
+# rm -r $OUTPUT 2>/dev/null || true
 
 flush() {
   [ "$FLUSH" = "1" ] && sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches' || true
@@ -79,9 +83,14 @@ flush() {
 
 echo "==> starting redis-server on $HOST:$PORT"
 flush
+
+$APPBENCH/monitor_cgroup.sh "redis" > /dev/null &
+MONITOR_PID=$!
+
 # start server in foreground, background the process; capture PID
-${APPPREFIX:+$APPPREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
-  --bind "$HOST" --port "$PORT" --daemonize no >"$SERVER_LOG" 2>&1 &
+sudo cgexec -g cpu,memory:$USER-group-redis \
+    ${APPPREFIX:+$APPPREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
+    --bind "$HOST" --port "$PORT" --daemonize no >"$SERVER_LOG" 2>&1 &
 SRV_PID=$!
 
 # wait until it answers PING (max ~10s)
@@ -93,11 +102,16 @@ done
 echo "==> running redis-benchmark (logging to $OUTPUT)"
 if [[ "$CG_ENABLE" == "true" && -d "/sys/fs/cgroup/$USER-group-redis" ]]; then
     echo "Using cgroup for redis-benchmark."
+    echo "Command to run:"
+    echo "sudo cgexec -g cpu,memory:$USER-group-redis /usr/bin/time -f 'TOTAL WALL CLOCK TIME(SEC): %e' 
+        ${APPPREFIX:+$APPPREFIX }\"$REDIS_BENCH\" -t \"$TESTS\" -n \"$REQUESTS\" -r \"$KEYSPACE\" -c \"$CLIENTS\" 
+        -P \"$PIPELINE\" -d \"$DATASIZE\" -h \"$HOST\" -p \"$PORT\" >>\"$OUTPUT\" 2>&1" >> $OUTPUT
+
     sudo cgexec -g cpu,memory:$USER-group-redis \
         /usr/bin/time -f 'TOTAL WALL CLOCK TIME(SEC): %e' \
         ${APPPREFIX:+$APPPREFIX }"$REDIS_BENCH" \
         -t "$TESTS" -n "$REQUESTS" -r "$KEYSPACE" -c "$CLIENTS" -P "$PIPELINE" -d "$DATASIZE" \
-        -q -h "$HOST" -p "$PORT" >>"$OUTPUT" 2>&1
+        -h "$HOST" -p "$PORT" >>"$OUTPUT" 2>&1
 else
     echo "Not using cgroup for redis-benchmark."
     # echo the command that will be executed next (for easier debugging)
@@ -112,7 +126,11 @@ else
 fi
 
 echo "==> stopping redis-server (pid $SRV_PID)"
-kill "$SRV_PID" >/dev/null 2>&1 || true
+sudo kill "$SRV_PID" >/dev/null 2>&1 || true
 wait "$SRV_PID" 2>/dev/null || true
+
+echo "==> stopping cgroup monitor (pid $MONITOR_PID)"
+sudo kill "$MONITOR_PID" >/dev/null 2>&1 || true
+wait "$MONITOR_PID" 2>/dev/null || true
 
 echo "Done. Output: $OUTPUT"

@@ -121,6 +121,13 @@ static long long mstime(void) {
     return mst;
 }
 
+static long long nstime(void) {
+    struct timespec ts;
+
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ((long long)ts.tv_sec)*1000000000LL + ts.tv_nsec;
+}
+
 static void freeClient(client c) {
     listNode *ln;
     aeDeleteFileEvent(config.el,c->context->fd,AE_WRITABLE);
@@ -447,7 +454,40 @@ static void showLatencyReport(void) {
     }
 }
 
+static void showLatencyReport_ns(void) {
+    int i, curlat = 0;
+    float perc, reqpersec;
+
+    reqpersec = (float)config.requests_finished/((float)config.totlatency);
+    if (!config.quiet && !config.csv) {
+        printf("====== %s ======\n", config.title);
+        printf("  %d requests completed in %.2f seconds\n", config.requests_finished,
+            (float)config.totlatency/1000000000);
+        printf("  %d parallel clients\n", config.numclients);
+        printf("  %d bytes payload\n", config.datasize);
+        printf("  keep alive: %d\n", config.keepalive);
+        printf("\n");
+
+        qsort(config.latency,config.requests,sizeof(long long),compareLatency);
+        for (i = 0; i < config.requests; i++) {
+            if (config.latency[i] != curlat || i == (config.requests-1)) {
+                curlat = config.latency[i];
+                perc = ((float)(i+1)*100)/config.requests;
+                printf("%.2f%% <= %d nanoseconds\n", perc, curlat);
+            }
+        }
+        printf("%.2f requests per second\n\n", reqpersec);
+    } else if (config.csv) {
+        printf("\"%s\",\"%.2f\"\n", config.title, reqpersec);
+    } else {
+        printf("%s: %.2f requests per second\n", config.title, reqpersec);
+    }
+}
+
 static void benchmark(char *title, char *cmd, int len) {
+    // Changed measurements nanosecond scale
+    // Updated showLatencyReport() --> showLatencyReport_ns() for nanosecond display
+
     client c;
 
     config.title = title;
@@ -610,6 +650,27 @@ int showThroughput(struct aeEventLoop *eventLoop, long long id, void *clientData
 	return 250;
     }
     float dt = (float)(mstime()-config.start)/1000.0;
+    float rps = (float)config.requests_finished/dt;
+    printf("%s: %.2f\r", config.title, rps);
+    fflush(stdout);
+    return 250; /* every 250ms */
+}
+int showThroughput_ns(struct aeEventLoop *eventLoop, long long id, void *clientData) {
+    REDIS_NOTUSED(eventLoop);
+    REDIS_NOTUSED(id);
+    REDIS_NOTUSED(clientData);
+
+    if (config.liveclients == 0) {
+        fprintf(stderr,"All clients disconnected... aborting.\n");
+        exit(1);
+    } 
+    if (config.csv) return 250;
+    if (config.idlemode == 1) {
+        printf("clients: %d\r", config.liveclients);
+        fflush(stdout);
+    return 250;
+    }
+    float dt = (float)(nstime()-config.start)/1000000000.0;
     float rps = (float)config.requests_finished/dt;
     printf("%s: %.2f\r", config.title, rps);
     fflush(stdout);

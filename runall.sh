@@ -31,12 +31,12 @@ RUNAPP(){
 RUNAPP_NEW(){
   echo "$APPBASE"
   cd "$APPBASE" || exit 2
-  if [[ ! -x "$APPBASE/run.sh" ]]; then
+  if [[ ! -x "$APPBASE/run_new.sh" ]]; then
     echo "ERROR: run.sh not found or not executable in $APPBASE" >&2
     exit 3
   fi
   # Per-app log goes to $OUTPUTDIR/$APP (stdout+stderr)
-  "$APPBASE/run.sh" "$RUNNOW" "$OUTPUTDIR/$APP" &> "$OUTPUTDIR/$APP"
+  "$APPBASE/run_new.sh" "$RUNNOW" "$OUTPUTDIR/$APP" &> "$OUTPUTDIR/$APP"
 }
 
 # ---- embed graph500 run.sh if missing (no overwrite) ----
