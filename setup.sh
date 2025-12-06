@@ -35,8 +35,23 @@ sudo pip install psutil
 #INSTALL_JAVA
 sudo apt-get -y install build-essential
 sudo apt-get -y install libssl-dev
+sudo apt-get -y install autoconf
+sudo apt-get -y install automake
+sudo apt-get -y install libevent-dev
+sudo apt-get -y install pkg-config
+sudo apt-get -y install zlib1g-dev
+sudo apt-get -y install linux-tools-common linux-tools-generic linux-tools-$(uname -r)
+}
+
+DOWNLOAD_VTUNE(){
+    wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+    sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+    rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+    echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+    sudo apt update
+    sudo apt-get -y install intel-oneapi-vtune
 }
 
 INSTALL_SYSTEM_LIBS
-
+DOWNLOAD_VTUNE
 

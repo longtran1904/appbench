@@ -85,8 +85,14 @@ add_task "INSTALL_SHAREDLIB_mmap_lib" \
 "cd \"$SHARED_LIBS/mmap_lib\" && make clean && make -j\"$JOBS\" && sudo make install"
 
 # Redis (bypass optional deps if missing)
-add_task "redis-3.0.0" \
-"cd \"$BASE/redis-3.0.0/src\" && make distclean >/dev/null 2>&1 || true && make clean && make IGNORE_MISSING_DEPS=1 -j\"$JOBS\" all"
+# add_task "redis-3.0.0" \
+# "cd \"$BASE/redis-3.0.0/src\" && make distclean >/dev/null 2>&1 || true && make clean && make IGNORE_MISSING_DEPS=1 -j\"$JOBS\" all"
+
+add_task "redis-3.0.0_debug" \
+"cd \"$BASE/redis-3.0.0/src\" && make distclean >/dev/null 2>&1 || true && make clean && make CFLAGS='-g -O2 -fno-omit-frame-pointer' IGNORE_MISSING_DEPS=1 -j\"$JOBS\" all"
+
+add_task "memtier_benchmark" \
+"cd \"$BASE/memtier_benchmark\" && autoreconf -ivf && ./configure && make clean && make -j\"$JOBS\" && sudo make install"
 
 # Phoenix 2.0
 add_task "phoenix-2.0_core" \
