@@ -2,3 +2,5 @@ leveldb
 output
 *.o
 *.ungraph.txt
+shared_data
+build-logs

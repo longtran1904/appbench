@@ -1,3 +1,3 @@
-#define REDIS_GIT_SHA1 "6e9b2411"
-#define REDIS_GIT_DIRTY "436"
-#define REDIS_BUILD_ID "node0.redis-long.lsm-pg0.utah.cloudlab.us-1764610982"
+#define REDIS_GIT_SHA1 "001f0363"
+#define REDIS_GIT_DIRTY "228"
+#define REDIS_BUILD_ID "node0.memcached-setup.lsm-pg0.utah.cloudlab.us-1765064680"

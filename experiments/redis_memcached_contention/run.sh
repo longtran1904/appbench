@@ -29,7 +29,7 @@ MEMCACHED_PORT="${MEMCACHED_PORT:-11211}"
 
 echo "OUTPUT: $OUTPUT"
 
-mkdir -p "$(dirname "$OUTPUT")"
+mkdir -p "$OUTPUT"
 SERVER_LOG="${OUTPUT%.log}.server.log"
 
 flush() {

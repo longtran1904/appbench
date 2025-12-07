@@ -155,6 +155,13 @@ run_redis_new(){
     RUNAPP_NEW
 }
 
+run_redis_memcached_contention(){
+  APPBASE="$BASE/experiments/redis_memcached_contention"
+  APP="redis_memcached_contention"
+  echo "running $APP..."
+  RUNAPP
+}
+
 run_leveldb(){
   APPBASE="$BASE/leveldb"
   APP="leveldb"
@@ -180,13 +187,14 @@ APP_ARG="${4:-${1:-}}"
 
 if [[ -n "$APP_ARG" ]]; then
   case "${APP_ARG,,}" in
-    graph500|g500) run_graph500 ;;
-    gtc)           run_gtc ;;
-    metis)         run_metis ;;
-    graphchi)      run_graphchi ;;
-    redis)         run_redis ;;
-    redis_new)     run_redis_new ;;
-    leveldb)       run_leveldb ;;
+    graph500|g500)              run_graph500 ;;
+    gtc)                        run_gtc ;;
+    metis)                      run_metis ;;
+    graphchi)                   run_graphchi ;;
+    redis)                      run_redis ;;
+    redis_new)                  run_redis_new ;;
+    redis_memcached_contention) run_redis_memcached_contention ;;
+    leveldb)                    run_leveldb ;;
 #    xstream* )     run_xstream ;;
     *)
       echo "Unknown app: $APP_ARG"
