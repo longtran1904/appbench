@@ -94,6 +94,9 @@ add_task "redis-3.0.0_debug" \
 add_task "memtier_benchmark" \
 "cd \"$BASE/memtier_benchmark\" && autoreconf -ivf && ./configure && make clean && make -j\"$JOBS\" && sudo make install"
 
+add_task "memcached" \
+"wget \"http://memcached.org/latest\" && tar -zxvf latest && cd memcached-* && ./configure && make && make test && sudo make install"
+
 # Phoenix 2.0
 add_task "phoenix-2.0_core" \
 "cd \"$BASE/phoenix-2.0\" && make clean && make -j\"$JOBS\""

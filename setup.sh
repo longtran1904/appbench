@@ -5,6 +5,11 @@ source ./setvars.sh
 git clone https://github.com/SudarsunKannan/leveldb
 ./createdata.sh
 
+# TO-DO: fork memtier_benchmark
+# Download memtier_benchmark
+git clone https://github.com/RedisLabs/memtier_benchmark.git
+
+
 INSTALL_SYSTEM_LIBS(){
 sudo apt-get install -y git
 sudo apt-get install -y software-properties-common
