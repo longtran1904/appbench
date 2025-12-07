@@ -55,6 +55,19 @@ DOWNLOAD_VTUNE(){
     echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
     sudo apt update
     sudo apt-get -y install intel-oneapi-vtune
+
+    source /opt/intel/oneapi/setvars.sh >/dev/null 2>&1
+    LINE='source /opt/intel/oneapi/setvars.sh >/dev/null 2>&1'
+    if ! grep -qxF "$LINE" "$HOME/.bashrc"; then
+        echo "$LINE" >> "$HOME/.bashrc"
+        echo "Added VTune setvars to $HOME/.bashrc"
+    fi
+    source $HOME/.bashrc
+
+    # Set perf event permissions
+    echo 0 | sudo tee /proc/sys/kernel/perf_event_paranoid
+    # Set kernel pointer permissions
+    echo 0 | sudo tee /proc/sys/kernel/kptr_restrict
 }
 
 INSTALL_SYSTEM_LIBS

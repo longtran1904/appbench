@@ -1,0 +1,201 @@
+{
+  "metadata": {
+    "experiment": "redis_contention",
+    "total_configurations": 28,
+    "data_source": "redis_multi/pair_0",
+    "metrics": [
+      "throughput_ops_sec",
+      "avg_latency_ms"
+    ]
+  },
+  "configurations": {
+    "clients_1": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 144220.98,
+          "avg_latency_ms": 0.02734
+        }
+      }
+    },
+    "clients_10": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 202690.45,
+          "avg_latency_ms": 0.21136
+        }
+      }
+    },
+    "clients_20": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 206589.88,
+          "avg_latency_ms": 0.4148
+        }
+      }
+    },
+    "clients_30": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 196019.15,
+          "avg_latency_ms": 0.61208
+        }
+      }
+    },
+    "clients_40": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 197303.09,
+          "avg_latency_ms": 0.81097
+        }
+      }
+    },
+    "clients_50": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 179909.92,
+          "avg_latency_ms": 1.11139
+        }
+      },
+      "threads_6": {
+        "pipeline_1": {
+          "throughput_ops_sec": 178168.11,
+          "avg_latency_ms": 1.68322
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 171265.28,
+          "avg_latency_ms": 2.33441
+        }
+      },
+      "threads_10": {
+        "pipeline_1": {
+          "throughput_ops_sec": 164668.89,
+          "avg_latency_ms": 3.03476
+        }
+      },
+      "threads_12": {
+        "pipeline_1": {
+          "throughput_ops_sec": 157108.38,
+          "avg_latency_ms": 3.81716
+        }
+      }
+    },
+    "clients_100": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 200539.64,
+          "avg_latency_ms": 1.99428
+        }
+      },
+      "threads_6": {
+        "pipeline_1": {
+          "throughput_ops_sec": 188022.63,
+          "avg_latency_ms": 3.19029
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 179511.88,
+          "avg_latency_ms": 4.45586
+        }
+      },
+      "threads_10": {
+        "pipeline_1": {
+          "throughput_ops_sec": 166406.51,
+          "avg_latency_ms": 6.00888
+        }
+      },
+      "threads_12": {
+        "pipeline_1": {
+          "throughput_ops_sec": 154816.07,
+          "avg_latency_ms": 7.7471
+        }
+      }
+    },
+    "clients_200": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 195687.22,
+          "avg_latency_ms": 4.0881
+        }
+      },
+      "threads_6": {
+        "pipeline_1": {
+          "throughput_ops_sec": 177355.68,
+          "avg_latency_ms": 6.76384
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 161745.72,
+          "avg_latency_ms": 9.88289
+        }
+      },
+      "threads_10": {
+        "pipeline_1": {
+          "throughput_ops_sec": 149722.52,
+          "avg_latency_ms": 13.34885
+        }
+      },
+      "threads_12": {
+        "pipeline_1": {
+          "throughput_ops_sec": 139683.08,
+          "avg_latency_ms": 17.17556
+        }
+      }
+    },
+    "clients_400": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 170132.47,
+          "avg_latency_ms": 9.40436
+        }
+      },
+      "threads_6": {
+        "pipeline_1": {
+          "throughput_ops_sec": 146740.34,
+          "avg_latency_ms": 16.35254
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 134133.15,
+          "avg_latency_ms": 23.85228
+        }
+      },
+      "threads_10": {
+        "pipeline_1": {
+          "throughput_ops_sec": 124920.24,
+          "avg_latency_ms": 32.0058
+        }
+      },
+      "threads_12": {
+        "pipeline_1": {
+          "throughput_ops_sec": 118984.54,
+          "avg_latency_ms": 40.3062
+        }
+      }
+    },
+    "clients_1024": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 130325.32,
+          "avg_latency_ms": 31.38008
+        }
+      },
+      "threads_6": {
+        "pipeline_1": {
+          "throughput_ops_sec": 104518.32,
+          "avg_latency_ms": 58.67861
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 96288.77,
+          "avg_latency_ms": 89.29714
+        }
+      }
+    }
+  }
+}

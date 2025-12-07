@@ -1,0 +1,93 @@
+==> starting redis-server on 127.0.0.1:6500
+Printing server log to: /mnt/appbench/experiments/redis_contention/redis_multi/pair_0/clients_1024_threads_10_pipeline_1/server.log
+==> redis-server: taskset -c 0 /mnt/appbench/redis-3.0.0/src/redis-server /mnt/appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no >/mnt/appbench/experiments/redis_contention/redis_multi/pair_0/clients_1024_threads_10_pipeline_1/server.log 2>&1 &
+[SERVER PID]: 93272
+==> starting memtier_benchmark taskset -c 1-15 memtier_benchmark --port 6500 --test-time=15     --clients 1024 --threads 10 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=100000000     --ratio=1:1 --hide-histogram     --out-file=/mnt/appbench/experiments/redis_contention/redis_multi/pair_0/clients_1024_threads_10_pipeline_1/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/redis_multi/pair_0/clients_1024_threads_10_pipeline_1/latency.out 2>&1 &
+[MEMTIER PID]: 93278
+Writing results to /mnt/appbench/experiments/redis_contention/redis_multi/pair_0/clients_1024_threads_10_pipeline_1/redis.out...
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+Connection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 8 finished due to connection failures, requesting restart.
+Restarting thread 8 (restart #1)...
+Thread 8 restarted successfully.
+[RUN #1 6%,   0 secs] 10 threads 1024 conns:       56150 ops,   62155 (avg:   62155) ops/sec, 32.66MB/sec (avg: 32.66MB/sec), 141.26 (avg: 141.26) msec latencyserver 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+server 127.0.0.1:6500 handle error response: -ERR max number of clients reached
+Done. Output: /mnt/appbench/experiments/redis_contention/redis_multi/pair_0/clients_1024_threads_10_pipeline_1/redis.out
