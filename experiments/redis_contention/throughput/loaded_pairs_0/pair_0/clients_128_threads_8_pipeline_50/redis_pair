@@ -1,0 +1,314 @@
++ CODEBASE=/mnt/appbench
++ REDIS_DIR=/mnt/appbench/redis-3.0.0/src
++ REDIS_SERVER=/mnt/appbench/redis-3.0.0/src/redis-server
++ REDIS_BENCH=/mnt/appbench/redis-3.0.0/src/redis-benchmark
++ REDIS_CLI=/mnt/appbench/redis-3.0.0/src/redis-cli
++ REDIS_CONF=/mnt/appbench/redis-3.0.0/redis.conf
++ OUTPUT=/mnt/appbench/output/redis
++ FLUSH=1
++ HOST=127.0.0.1
++ CLIENTS=128
++ THREADS=8
++ PIPELINE=50
++ LOADED_PAIRS=0
++ REDIS_PORT=6500
++ REDIS_TESTTIME=60
++ REDIS_DATASIZE_RANGE=4-2048
++ REDIS_DATASIZE_PATTERN=R
++ REDIS_KEY_MAXIMUM=100000000
++ REDIS_KEY_PATTERN=R:R
++ REDIS_RATIO=5:1
++ REDIS_OUTPUT=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/redis.out
++ REDIS_HISTOGRAM_FILE=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/latency.out
++ SERVER_LOG=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/server.log
++ REDIS_PREFIX='taskset -c 1'
++ MEMTIER_PREFIX='/usr/bin/time -v taskset -c 2-15'
++ echo '==> starting redis-server on 127.0.0.1:6500'
+==> starting redis-server on 127.0.0.1:6500
++ flush
++ '[' 1 = 1 ']'
++ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
++ echo 'Printing server log to: /mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/server.log'
+Printing server log to: /mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/server.log
++ echo '==> redis-server: taskset -c 1 /mnt/appbench/redis-3.0.0/src/redis-server /mnt/appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no >/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/server.log 2>&1 &'
+==> redis-server: taskset -c 1 /mnt/appbench/redis-3.0.0/src/redis-server /mnt/appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no >/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/server.log 2>&1 &
++ for i in {1..50}
++ /mnt/appbench/redis-3.0.0/src/redis-cli -h 127.0.0.1 -p 6500 PING
++ vtune -collect memory-access -result-dir /mnt/appbench/vtune_projects/redis_O3/redis_clients_128_threads_8_loaded_pairs_0 -knob analyze-mem-objects=true -finalization-mode=full -search-dir=/usr/lib/debug/boot -- taskset -c 1 /mnt/appbench/redis-3.0.0/src/redis-server /mnt/appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no
++ READY=1
++ echo '[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)'
+[INFO] Redis is ready on 127.0.0.1:6500 (after 200 ms)
++ echo READY
++ break
++ '[' 1 -ne 1 ']'
+++ pgrep -f redis-server
+++ tail -n 1
++ SRV_PID=498911
++ echo '[SERVER PID]: 498911'
+[SERVER PID]: 498911
++ echo '==> starting memtier_benchmark /usr/bin/time -v taskset -c 2-15 memtier_benchmark --port 6500 --test-time=60     --clients 128 --threads 8 --pipeline 50     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=100000000     --ratio=5:1 --hide-histogram     --out-file=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/latency.out 2>&1 &'
+==> starting memtier_benchmark /usr/bin/time -v taskset -c 2-15 memtier_benchmark --port 6500 --test-time=60     --clients 128 --threads 8 --pipeline 50     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=100000000     --ratio=5:1 --hide-histogram     --out-file=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/latency.out 2>&1 &
++ MEMTIER_PID=498916
++ echo '[MEMTIER PID]: 498916'
+[MEMTIER PID]: 498916
++ wait 498916
++ /usr/bin/time -v taskset -c 2-15 memtier_benchmark --port 6500 --test-time=60 --clients 128 --threads 8 --pipeline 50 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=100000000 --ratio=5:1 --hide-histogram --out-file=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/latency.out
+Writing results to /mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/redis.out...
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+[RUN #1 2%,   0 secs]  8 threads 128 conns:      166909 ops,  168761 (avg:  168761) ops/sec, 142.55MB/sec (avg: 142.55MB/sec), 245.88 (avg: 245.88) msec latency[RUN #1 3%,   1 secs]  8 threads 128 conns:      353966 ops,  187013 (avg:  177938) ops/sec, 165.02MB/sec (avg: 153.85MB/sec), 285.34 (avg: 266.74) msec latency[RUN #1 5%,   2 secs]  8 threads 128 conns:      544174 ops,  190163 (avg:  182029) ops/sec, 149.16MB/sec (avg: 152.28MB/sec), 268.92 (avg: 267.50) msec latency[RUN #1 7%,   3 secs]  8 threads 128 conns:      731536 ops,  187318 (avg:  183355) ops/sec, 160.53MB/sec (avg: 154.35MB/sec), 280.00 (avg: 270.70) msec latency[RUN #1 8%,   4 secs]  8 threads 128 conns:      910845 ops,  179265 (avg:  182535) ops/sec, 153.20MB/sec (avg: 154.12MB/sec), 275.45 (avg: 271.64) msec latency[RUN #1 10%,   5 secs]  8 threads 128 conns:     1091959 ops,  181072 (avg:  182291) ops/sec, 162.47MB/sec (avg: 155.51MB/sec), 280.02 (avg: 273.03) msec latency[RUN #1 12%,   6 secs]  8 threads 128 conns:     1283646 ops,  191646 (avg:  183629) ops/sec, 165.36MB/sec (avg: 156.92MB/sec), 278.38 (avg: 273.83) msec latency[RUN #1 13%,   7 secs]  8 threads 128 conns:     1465080 ops,  181394 (avg:  183349) ops/sec, 158.75MB/sec (avg: 157.15MB/sec), 278.30 (avg: 274.38) msec latency[RUN #1 15%,   8 secs]  8 threads 128 conns:     1640982 ops,  175858 (avg:  182516) ops/sec, 156.84MB/sec (avg: 157.12MB/sec), 278.92 (avg: 274.87) msec latency[RUN #1 17%,   9 secs]  8 threads 128 conns:     1826086 ops,  185061 (avg:  182771) ops/sec, 155.78MB/sec (avg: 156.98MB/sec), 276.20 (avg: 275.00) msec latency[RUN #1 18%,  10 secs]  8 threads 128 conns:     2014506 ops,  188376 (avg:  183281) ops/sec, 164.02MB/sec (avg: 157.62MB/sec), 281.51 (avg: 275.61) msec latency[RUN #1 20%,  11 secs]  8 threads 128 conns:     2188763 ops,  174216 (avg:  182525) ops/sec, 165.07MB/sec (avg: 158.24MB/sec), 285.23 (avg: 276.38) msec latency[RUN #1 22%,  12 secs]  8 threads 128 conns:     2380621 ops,  191812 (avg:  183240) ops/sec, 165.90MB/sec (avg: 158.83MB/sec), 278.46 (avg: 276.55) msec latency[RUN #1 23%,  13 secs]  8 threads 128 conns:     2562223 ops,  181559 (avg:  183120) ops/sec, 158.64MB/sec (avg: 158.82MB/sec), 276.07 (avg: 276.51) msec latency[RUN #1 25%,  14 secs]  8 threads 128 conns:     2743727 ops,  181465 (avg:  183009) ops/sec, 159.30MB/sec (avg: 158.85MB/sec), 279.46 (avg: 276.71) msec latency[RUN #1 27%,  15 secs]  8 threads 128 conns:     2928547 ops,  184780 (avg:  183120) ops/sec, 156.85MB/sec (avg: 158.73MB/sec), 274.46 (avg: 276.56) msec latency[RUN #1 28%,  16 secs]  8 threads 128 conns:     3111707 ops,  183121 (avg:  183120) ops/sec, 170.23MB/sec (avg: 159.40MB/sec), 284.60 (avg: 277.04) msec latency[RUN #1 30%,  17 secs]  8 threads 128 conns:     3289015 ops,  177272 (avg:  182795) ops/sec, 164.37MB/sec (avg: 159.68MB/sec), 287.05 (avg: 277.58) msec latency[RUN #1 32%,  18 secs]  8 threads 128 conns:     3471968 ops,  182913 (avg:  182801) ops/sec, 155.16MB/sec (avg: 159.44MB/sec), 276.38 (avg: 277.51) msec latency[RUN #1 33%,  19 secs]  8 threads 128 conns:     3657405 ops,  185394 (avg:  182931) ops/sec, 165.11MB/sec (avg: 159.72MB/sec), 280.05 (avg: 277.64) msec latency[RUN #1 35%,  20 secs]  8 threads 128 conns:     3845012 ops,  187563 (avg:  183152) ops/sec, 151.80MB/sec (avg: 159.35MB/sec), 274.35 (avg: 277.48) msec latency[RUN #1 37%,  21 secs]  8 threads 128 conns:     4034302 ops,  189246 (avg:  183429) ops/sec, 158.54MB/sec (avg: 159.31MB/sec), 277.61 (avg: 277.49) msec latency[RUN #1 38%,  22 secs]  8 threads 128 conns:     4206667 ops,  172324 (avg:  182946) ops/sec, 160.40MB/sec (avg: 159.36MB/sec), 282.58 (avg: 277.70) msec latency[RUN #1 40%,  23 secs]  8 threads 128 conns:     4394077 ops,  187366 (avg:  183130) ops/sec, 154.91MB/sec (avg: 159.17MB/sec), 277.58 (avg: 277.69) msec latency[RUN #1 42%,  24 secs]  8 threads 128 conns:     4582098 ops,  187978 (avg:  183324) ops/sec, 149.18MB/sec (avg: 158.77MB/sec), 270.56 (avg: 277.40) msec latency[RUN #1 43%,  25 secs]  8 threads 128 conns:     4765078 ops,  182938 (avg:  183309) ops/sec, 158.35MB/sec (avg: 158.76MB/sec), 281.69 (avg: 277.56) msec latency[RUN #1 45%,  26 secs]  8 threads 128 conns:     4955625 ops,  190502 (avg:  183576) ops/sec, 163.53MB/sec (avg: 158.93MB/sec), 272.81 (avg: 277.38) msec latency[RUN #1 47%,  27 secs]  8 threads 128 conns:     5133831 ops,  178165 (avg:  183382) ops/sec, 164.15MB/sec (avg: 159.12MB/sec), 284.39 (avg: 277.62) msec latency[RUN #1 48%,  28 secs]  8 threads 128 conns:     5314374 ops,  180501 (avg:  183283) ops/sec, 159.25MB/sec (avg: 159.12MB/sec), 281.30 (avg: 277.75) msec latency[RUN #1 50%,  29 secs]  8 threads 128 conns:     5504155 ops,  189736 (avg:  183498) ops/sec, 160.29MB/sec (avg: 159.16MB/sec), 275.93 (avg: 277.69) msec latency[RUN #1 52%,  30 secs]  8 threads 128 conns:     5690346 ops,  186148 (avg:  183584) ops/sec, 162.44MB/sec (avg: 159.27MB/sec), 270.61 (avg: 277.45) msec latency[RUN #1 53%,  31 secs]  8 threads 128 conns:     5876136 ops,  185746 (avg:  183651) ops/sec, 161.42MB/sec (avg: 159.34MB/sec), 278.20 (avg: 277.48) msec latency[RUN #1 55%,  32 secs]  8 threads 128 conns:     6064386 ops,  188206 (avg:  183789) ops/sec, 151.89MB/sec (avg: 159.11MB/sec), 271.42 (avg: 277.29) msec latency[RUN #1 57%,  33 secs]  8 threads 128 conns:     6252251 ops,  187816 (avg:  183908) ops/sec, 159.68MB/sec (avg: 159.13MB/sec), 271.05 (avg: 277.10) msec latency[RUN #1 58%,  34 secs]  8 threads 128 conns:     6431487 ops,  179198 (avg:  183773) ops/sec, 159.86MB/sec (avg: 159.15MB/sec), 280.29 (avg: 277.19) msec latency[RUN #1 60%,  35 secs]  8 threads 128 conns:     6619171 ops,  187636 (avg:  183881) ops/sec, 159.01MB/sec (avg: 159.14MB/sec), 278.73 (avg: 277.24) msec latencyConnection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 7 finished due to connection failures, requesting restart.
+Connection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 6 finished due to connection failures, requesting restart.
+Connection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 5 finished due to connection failures, requesting restart.
+Connection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 4 finished due to connection failures, requesting restart.
+Connection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 3 finished due to connection failures, requesting restart.
+Connection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 2 finished due to connection failures, requesting restart.
+Connection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 1 finished due to connection failures, requesting restart.
+Connection error: Connection reset by peer
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 0 finished due to connection failures, requesting restart.
+Restarting thread 0 (restart #1)...
+Thread 0 restarted successfully.
+Restarting thread 1 (restart #1)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 0 finished due to connection failures, requesting restart.
+Thread 1 restarted successfully.
+Restarting thread 2 (restart #1)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 1 finished due to connection failures, requesting restart.
+Thread 2 restarted successfully.
+Restarting thread 3 (restart #1)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 2 finished due to connection failures, requesting restart.
+Thread 3 restarted successfully.
+Restarting thread 4 (restart #1)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 3 finished due to connection failures, requesting restart.
+Thread 4 restarted successfully.
+Restarting thread 5 (restart #1)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 4 finished due to connection failures, requesting restart.
+Thread 5 restarted successfully.
+Restarting thread 6 (restart #1)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 5 finished due to connection failures, requesting restart.
+Thread 6 restarted successfully.
+Restarting thread 7 (restart #1)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 6 finished due to connection failures, requesting restart.
+Thread 7 restarted successfully.
+[RUN #1 0%,   0 secs]  8 threads 128 conns:           0 ops, 1000000 (avg:       0) ops/sec, 976.56KB/sec (avg: 0.00KB/sec), -0.00 (avg:  0.00) msec latencyConnection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 7 finished due to connection failures, requesting restart.
+Restarting thread 0 (restart #2)...
+Thread 0 restarted successfully.
+Restarting thread 1 (restart #2)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 0 finished due to connection failures, requesting restart.
+Thread 1 restarted successfully.
+Restarting thread 2 (restart #2)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 1 finished due to connection failures, requesting restart.
+Thread 2 restarted successfully.
+Restarting thread 3 (restart #2)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 2 finished due to connection failures, requesting restart.
+Thread 3 restarted successfully.
+Restarting thread 4 (restart #2)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 3 finished due to connection failures, requesting restart.
+Thread 4 restarted successfully.
+Restarting thread 5 (restart #2)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 4 finished due to connection failures, requesting restart.
+Thread 5 restarted successfully.
+Restarting thread 6 (restart #2)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 5 finished due to connection failures, requesting restart.
+Thread 6 restarted successfully.
+Restarting thread 7 (restart #2)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 6 finished due to connection failures, requesting restart.
+Thread 7 restarted successfully.
+Connection error: Connection refused
+[RUN #1 0%,   0 secs]  8 threads 128 conns:           0 ops, 1000000 (avg:       0) ops/sec, 976.56KB/sec (avg: 0.00KB/sec), -0.00 (avg:  0.00) msec latencyMaximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 7 finished due to connection failures, requesting restart.
+Restarting thread 0 (restart #3)...
+Thread 0 restarted successfully.
+Restarting thread 1 (restart #3)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 0 finished due to connection failures, requesting restart.
+Thread 1 restarted successfully.
+Restarting thread 2 (restart #3)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 1 finished due to connection failures, requesting restart.
+Thread 2 restarted successfully.
+Restarting thread 3 (restart #3)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 2 finished due to connection failures, requesting restart.
+Thread 3 restarted successfully.
+Restarting thread 4 (restart #3)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 3 finished due to connection failures, requesting restart.
+Thread 4 restarted successfully.
+Restarting thread 5 (restart #3)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 4 finished due to connection failures, requesting restart.
+Thread 5 restarted successfully.
+Restarting thread 6 (restart #3)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 5 finished due to connection failures, requesting restart.
+Thread 6 restarted successfully.
+Restarting thread 7 (restart #3)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 6 finished due to connection failures, requesting restart.
+Thread 7 restarted successfully.
+[RUN #1 0%,   0 secs]  8 threads 128 conns:           0 ops, 1000000 (avg:       0) ops/sec, 976.56KB/sec (avg: 0.00KB/sec), -0.00 (avg:  0.00) msec latencyConnection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 7 finished due to connection failures, requesting restart.
+Restarting thread 0 (restart #4)...
+Thread 0 restarted successfully.
+Restarting thread 1 (restart #4)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 0 finished due to connection failures, requesting restart.
+Thread 1 restarted successfully.
+Restarting thread 2 (restart #4)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 1 finished due to connection failures, requesting restart.
+Thread 2 restarted successfully.
+Restarting thread 3 (restart #4)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 2 finished due to connection failures, requesting restart.
+Thread 3 restarted successfully.
+Restarting thread 4 (restart #4)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 3 finished due to connection failures, requesting restart.
+Thread 4 restarted successfully.
+Restarting thread 5 (restart #4)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 4 finished due to connection failures, requesting restart.
+Thread 5 restarted successfully.
+Restarting thread 6 (restart #4)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 5 finished due to connection failures, requesting restart.
+Thread 6 restarted successfully.
+Restarting thread 7 (restart #4)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 6 finished due to connection failures, requesting restart.
+Thread 7 restarted successfully.
+[RUN #1 0%,   0 secs]  8 threads 128 conns:           0 ops, 1000000 (avg:       0) ops/sec, 976.56KB/sec (avg: 0.00KB/sec), -0.00 (avg:  0.00) msec latencyConnection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 7 finished due to connection failures, requesting restart.
+Restarting thread 0 (restart #5)...
+Thread 0 restarted successfully.
+Restarting thread 1 (restart #5)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 0 finished due to connection failures, requesting restart.
+Thread 1 restarted successfully.
+Restarting thread 2 (restart #5)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 1 finished due to connection failures, requesting restart.
+Thread 2 restarted successfully.
+Restarting thread 3 (restart #5)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 2 finished due to connection failures, requesting restart.
+Thread 3 restarted successfully.
+Restarting thread 4 (restart #5)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 3 finished due to connection failures, requesting restart.
+Thread 4 restarted successfully.
+Restarting thread 5 (restart #5)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 4 finished due to connection failures, requesting restart.
+Thread 5 restarted successfully.
+Restarting thread 6 (restart #5)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 5 finished due to connection failures, requesting restart.
+Thread 6 restarted successfully.
+Restarting thread 7 (restart #5)...
+Connection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 6 finished due to connection failures, requesting restart.
+Thread 7 restarted successfully.
+[RUN #1 0%,   0 secs]  8 threads 128 conns:           0 ops, 1000000 (avg:       0) ops/sec, 976.56KB/sec (avg: 0.00KB/sec), -0.00 (avg:  0.00) msec latencyConnection error: Connection refused
+Maximum reconnection attempts (0) exceeded for Connection error, triggering thread restart.
+Thread 7 finished due to connection failures, requesting restart.
+[RUN #1 0%,   0 secs]  0 threads 128 conns 8 conn errors:           0 ops, 1000000 (avg:       0) ops/sec, 976.56KB/sec (avg: 0.00KB/sec), -0.00 (avg:  0.00) msec latency
+
+	Command being timed: "taskset -c 2-15 memtier_benchmark --port 6500 --test-time=60 --clients 128 --threads 8 --pipeline 50 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=100000000 --ratio=5:1 --hide-histogram --out-file=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/latency.out"
+	User time (seconds): 10.70
+	System time (seconds): 3.46
+	Percent of CPU this job got: 33%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:42.60
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 248200
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 28
+	Minor (reclaiming a frame) page faults: 117451
+	Voluntary context switches: 199392
+	Involuntary context switches: 147
+	Swaps: 0
+	File system inputs: 3880
+	File system outputs: 48
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ kill 498911
++ true
++ wait 498911
++ true
++ echo 'Done. Output: /mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/redis.out'
+Done. Output: /mnt/appbench/experiments/redis_contention/throughput/loaded_pairs_0/pair_0/clients_128_threads_8_pipeline_50/redis.out
++ set -x

@@ -1,0 +1,381 @@
+{
+  "metadata": {
+    "experiment": "redis_contention",
+    "total_configurations": 53,
+    "data_source": "redis_multi/pair_0",
+    "metrics": [
+      "throughput_ops_sec",
+      "avg_latency_ms",
+      "p99_latency_ms",
+      "p99_9_latency_ms"
+    ]
+  },
+  "configurations": {
+    "clients_1": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 136632.84,
+          "avg_latency_ms": 0.02861,
+          "p99_latency_ms": 0.047,
+          "p99_9_latency_ms": 0.055
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 483625.62,
+          "avg_latency_ms": 0.07743,
+          "p99_latency_ms": 0.159,
+          "p99_9_latency_ms": 0.199
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 660226.2,
+          "avg_latency_ms": 0.28674,
+          "p99_latency_ms": 0.663,
+          "p99_9_latency_ms": 0.927
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 867449.31,
+          "avg_latency_ms": 0.44966,
+          "p99_latency_ms": 1.159,
+          "p99_9_latency_ms": 1.527
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 133032.34,
+          "avg_latency_ms": 0.05946,
+          "p99_latency_ms": 0.095,
+          "p99_9_latency_ms": 0.119
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 510510.15,
+          "avg_latency_ms": 0.15175,
+          "p99_latency_ms": 0.263,
+          "p99_9_latency_ms": 0.335
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 750852.19,
+          "avg_latency_ms": 0.51908,
+          "p99_latency_ms": 1.247,
+          "p99_9_latency_ms": 1.967
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 951356.9,
+          "avg_latency_ms": 0.8265,
+          "p99_latency_ms": 2.111,
+          "p99_9_latency_ms": 2.943
+        }
+      }
+    },
+    "clients_4": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 83990.48,
+          "avg_latency_ms": 0.19059,
+          "p99_latency_ms": 0.287,
+          "p99_9_latency_ms": 2.639
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 187988.23,
+          "avg_latency_ms": 4.24699,
+          "p99_latency_ms": 7.839,
+          "p99_9_latency_ms": 9.855
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 186924.11,
+          "avg_latency_ms": 8.55239,
+          "p99_latency_ms": 12.479,
+          "p99_9_latency_ms": 14.975
+        }
+      }
+    },
+    "clients_6": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 86684.16,
+          "avg_latency_ms": 0.277,
+          "p99_latency_ms": 0.415,
+          "p99_9_latency_ms": 2.767
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 181997.65,
+          "avg_latency_ms": 6.58562,
+          "p99_latency_ms": 14.591,
+          "p99_9_latency_ms": 18.687
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 189476.01,
+          "avg_latency_ms": 12.65832,
+          "p99_latency_ms": 17.407,
+          "p99_9_latency_ms": 23.679
+        }
+      }
+    },
+    "clients_10": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 88963.4,
+          "avg_latency_ms": 0.4497,
+          "p99_latency_ms": 2.831,
+          "p99_9_latency_ms": 2.991
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 193108.73,
+          "avg_latency_ms": 10.52469,
+          "p99_latency_ms": 16.255,
+          "p99_9_latency_ms": 23.551
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 190617.57,
+          "avg_latency_ms": 20.97513,
+          "p99_latency_ms": 29.311,
+          "p99_9_latency_ms": 34.815
+        }
+      }
+    },
+    "clients_16": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 183776.7,
+          "avg_latency_ms": 0.34812,
+          "p99_latency_ms": 0.575,
+          "p99_9_latency_ms": 0.719
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 695260.05,
+          "avg_latency_ms": 0.91717,
+          "p99_latency_ms": 1.495,
+          "p99_9_latency_ms": 2.143
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 1178180.51,
+          "avg_latency_ms": 2.7074,
+          "p99_latency_ms": 5.375,
+          "p99_9_latency_ms": 7.583
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 1236780.68,
+          "avg_latency_ms": 5.16491,
+          "p99_latency_ms": 8.319,
+          "p99_9_latency_ms": 14.591
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 168193.4,
+          "avg_latency_ms": 0.76068,
+          "p99_latency_ms": 1.183,
+          "p99_9_latency_ms": 1.583
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 717857.49,
+          "avg_latency_ms": 1.8084,
+          "p99_latency_ms": 3.055,
+          "p99_9_latency_ms": 3.775
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 1169326.89,
+          "avg_latency_ms": 5.4592,
+          "p99_latency_ms": 10.559,
+          "p99_9_latency_ms": 11.903
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 1175372.0,
+          "avg_latency_ms": 11.05473,
+          "p99_latency_ms": 17.535,
+          "p99_9_latency_ms": 23.807
+        }
+      }
+    },
+    "clients_32": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 188843.01,
+          "avg_latency_ms": 0.6778,
+          "p99_latency_ms": 1.191,
+          "p99_9_latency_ms": 1.263
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 752710.44,
+          "avg_latency_ms": 1.69718,
+          "p99_latency_ms": 2.751,
+          "p99_9_latency_ms": 4.159
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 1211765.19,
+          "avg_latency_ms": 5.27241,
+          "p99_latency_ms": 10.687,
+          "p99_9_latency_ms": 12.031
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 1249710.21,
+          "avg_latency_ms": 10.23284,
+          "p99_latency_ms": 16.767,
+          "p99_9_latency_ms": 22.399
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 162487.08,
+          "avg_latency_ms": 1.57493,
+          "p99_latency_ms": 2.415,
+          "p99_9_latency_ms": 3.871
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 732617.56,
+          "avg_latency_ms": 3.48718,
+          "p99_latency_ms": 5.343,
+          "p99_9_latency_ms": 8.127
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 1133192.77,
+          "avg_latency_ms": 11.276,
+          "p99_latency_ms": 21.503,
+          "p99_9_latency_ms": 23.807
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 1167166.28,
+          "avg_latency_ms": 21.91188,
+          "p99_latency_ms": 33.791,
+          "p99_9_latency_ms": 43.007
+        }
+      }
+    },
+    "clients_64": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 187860.92,
+          "avg_latency_ms": 1.36256,
+          "p99_latency_ms": 2.287,
+          "p99_9_latency_ms": 4.063
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 839660.8,
+          "avg_latency_ms": 3.04554,
+          "p99_latency_ms": 4.959,
+          "p99_9_latency_ms": 7.551
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 1194148.11,
+          "avg_latency_ms": 10.70825,
+          "p99_latency_ms": 21.247,
+          "p99_9_latency_ms": 24.319
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 1196952.57,
+          "avg_latency_ms": 21.37305,
+          "p99_latency_ms": 33.535,
+          "p99_9_latency_ms": 42.239
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 163486.68,
+          "avg_latency_ms": 3.13087,
+          "p99_latency_ms": 4.671,
+          "p99_9_latency_ms": 11.583
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 749947.58,
+          "avg_latency_ms": 6.81897,
+          "p99_latency_ms": 11.391,
+          "p99_9_latency_ms": 18.943
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 1078360.15,
+          "avg_latency_ms": 23.71847,
+          "p99_latency_ms": 46.079,
+          "p99_9_latency_ms": 52.223
+        },
+        "pipeline_100": {
+          "throughput_ops_sec": 1092115.77,
+          "avg_latency_ms": 46.84841,
+          "p99_latency_ms": 72.703,
+          "p99_9_latency_ms": 91.647
+        }
+      }
+    },
+    "clients_128": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 193437.11,
+          "avg_latency_ms": 2.64668,
+          "p99_latency_ms": 4.287,
+          "p99_9_latency_ms": 10.879
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 170083.05,
+          "avg_latency_ms": 30.09538,
+          "p99_latency_ms": 38.399,
+          "p99_9_latency_ms": 55.807
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 185565.82,
+          "avg_latency_ms": 137.866,
+          "p99_latency_ms": 210.943,
+          "p99_9_latency_ms": 223.231
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 84771.76,
+          "avg_latency_ms": 12.08416,
+          "p99_latency_ms": 27.519,
+          "p99_9_latency_ms": 54.271
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 164024.19,
+          "avg_latency_ms": 63.30983,
+          "p99_latency_ms": 71.167,
+          "p99_9_latency_ms": 96.767
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": NaN,
+          "avg_latency_ms": NaN,
+          "p99_latency_ms": 0.007,
+          "p99_9_latency_ms": 0.007
+        }
+      }
+    },
+    "clients_256": {
+      "threads_4": {
+        "pipeline_1": {
+          "throughput_ops_sec": 88369.16,
+          "avg_latency_ms": 11.58676,
+          "p99_latency_ms": 18.815,
+          "p99_9_latency_ms": 29.439
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 158581.22,
+          "avg_latency_ms": 64.56403,
+          "p99_latency_ms": 93.183,
+          "p99_9_latency_ms": 120.319
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 187118.15,
+          "avg_latency_ms": 273.50272,
+          "p99_latency_ms": 421.887,
+          "p99_9_latency_ms": 456.703
+        }
+      },
+      "threads_8": {
+        "pipeline_1": {
+          "throughput_ops_sec": 85180.99,
+          "avg_latency_ms": 24.03695,
+          "p99_latency_ms": 35.839,
+          "p99_9_latency_ms": 46.079
+        },
+        "pipeline_10": {
+          "throughput_ops_sec": 165859.17,
+          "avg_latency_ms": 123.46316,
+          "p99_latency_ms": 146.431,
+          "p99_9_latency_ms": 209.919
+        },
+        "pipeline_50": {
+          "throughput_ops_sec": 180449.57,
+          "avg_latency_ms": 571.78111,
+          "p99_latency_ms": 860.159,
+          "p99_9_latency_ms": 901.119
+        }
+      }
+    }
+  }
+}

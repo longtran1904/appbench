@@ -1,0 +1,150 @@
+==> starting redis-server on 127.0.0.1:6500
+Printing server log to: /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/server.log
+==> redis-server: taskset -c 1 /mnt/appbench/redis-3.0.0/src/redis-server /mnt/appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6500 --daemonize no >/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/server.log 2>&1 &
+[SERVER PID]: 159987
+==> starting memtier_benchmark /usr/bin/time -v taskset -c 2-3 memtier_benchmark --port 6500 --test-time=15     --clients 30 --threads 4 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=100000000     --ratio=1:1 --hide-histogram     --out-file=/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out 2>&1 &
+[MEMTIER PID]: 159992
+vtune: Warning: To profile kernel modules during the session, make sure they are available in the /lib/modules/kernel_version/ location.
+vtune: Peak bandwidth measurement started.
+vtune: Peak bandwidth measurement finished.
+vtune: Collection started. To stop the collection, either press CTRL-C or enter from another console window: vtune -r /mnt/appbench/vtune_projects/redis_kdebug_loaded_throughput_2 -command stop.
+Writing results to /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/redis.out...
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+[RUN #1 6%,   0 secs]  4 threads 30 conns:       78205 ops,   81985 (avg:   81985) ops/sec, 42.20MB/sec (avg: 42.20MB/sec),  1.45 (avg:  1.45) msec latency[RUN #1 13%,   1 secs]  4 threads 30 conns:      159852 ops,   81637 (avg:   81807) ops/sec, 44.29MB/sec (avg: 43.27MB/sec),  1.47 (avg:  1.46) msec latency[RUN #1 20%,   2 secs]  4 threads 30 conns:      242255 ops,   82393 (avg:   82005) ops/sec, 42.80MB/sec (avg: 43.11MB/sec),  1.45 (avg:  1.45) msec latency[RUN #1 26%,   3 secs]  4 threads 30 conns:      324266 ops,   82002 (avg:   82005) ops/sec, 42.88MB/sec (avg: 43.05MB/sec),  1.46 (avg:  1.46) msec latency[RUN #1 33%,   4 secs]  4 threads 30 conns:      407905 ops,   83630 (avg:   82333) ops/sec, 45.18MB/sec (avg: 43.48MB/sec),  1.43 (avg:  1.45) msec latency[RUN #1 40%,   5 secs]  4 threads 30 conns:      492478 ops,   84564 (avg:   82707) ops/sec, 45.31MB/sec (avg: 43.79MB/sec),  1.42 (avg:  1.45) msec latency[RUN #1 46%,   6 secs]  4 threads 30 conns:      577320 ops,   84834 (avg:   83013) ops/sec, 44.41MB/sec (avg: 43.88MB/sec),  1.41 (avg:  1.44) msec latency[RUN #1 53%,   7 secs]  4 threads 30 conns:      661744 ops,   84415 (avg:   83189) ops/sec, 44.00MB/sec (avg: 43.89MB/sec),  1.42 (avg:  1.44) msec latency[RUN #1 60%,   8 secs]  4 threads 30 conns:      746664 ops,   84911 (avg:   83382) ops/sec, 45.08MB/sec (avg: 44.03MB/sec),  1.41 (avg:  1.43) msec latency[RUN #1 66%,   9 secs]  4 threads 30 conns:      831357 ops,   84685 (avg:   83513) ops/sec, 47.03MB/sec (avg: 44.33MB/sec),  1.41 (avg:  1.43) msec latency[RUN #1 73%,  10 secs]  4 threads 30 conns:      916237 ops,   84872 (avg:   83637) ops/sec, 45.38MB/sec (avg: 44.42MB/sec),  1.41 (avg:  1.43) msec latency[RUN #1 80%,  11 secs]  4 threads 30 conns:     1001331 ops,   85086 (avg:   83758) ops/sec, 44.87MB/sec (avg: 44.46MB/sec),  1.40 (avg:  1.43) msec latency[RUN #1 86%,  12 secs]  4 threads 30 conns:     1086970 ops,   85631 (avg:   83903) ops/sec, 44.09MB/sec (avg: 44.43MB/sec),  1.39 (avg:  1.42) msec latency[RUN #1 93%,  13 secs]  4 threads 30 conns:     1171858 ops,   84879 (avg:   83973) ops/sec, 45.69MB/sec (avg: 44.52MB/sec),  1.41 (avg:  1.42) msec latency[RUN #1 100%,  14 secs]  4 threads 30 conns:     1256824 ops,   84958 (avg:   84038) ops/sec, 45.68MB/sec (avg: 44.60MB/sec),  1.40 (avg:  1.42) msec latency[RUN #1 100%,  15 secs]  0 threads 30 conns:     1260784 ops,   84958 (avg:   84019) ops/sec, 45.68MB/sec (avg: 44.59MB/sec),  1.40 (avg:  1.42) msec latency
+
+Writing Full Run command HDR latency histogram results to /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out_FULL_RUN_1.txt...
+Writing Full Run command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out_FULL_RUN_1.hgrm...
+Writing GET command HDR latency histogram results to /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out_GET_command_run_1.txt...
+Writing GET command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out_GET_command_run_1.hgrm...
+Writing SET command HDR latency histogram results to /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out_SET_command_run_1.txt...
+Writing SET command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out_SET_command_run_1.hgrm...
+	Command being timed: "taskset -c 2-3 memtier_benchmark --port 6500 --test-time=15 --clients 30 --threads 4 --pipeline 1 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=100000000 --ratio=1:1 --hide-histogram --out-file=/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out"
+	User time (seconds): 20.88
+	System time (seconds): 9.89
+	Percent of CPU this job got: 184%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:16.65
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 106320
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 15
+	Minor (reclaiming a frame) page faults: 102605
+	Voluntary context switches: 257
+	Involuntary context switches: 49773
+	Swaps: 0
+	File system inputs: 8808
+	File system outputs: 196240
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+vtune: Collection stopped.
+vtune: Using result path `/mnt/appbench/vtune_projects/redis_kdebug_loaded_throughput_2'
+vtune: Executing actions  0 %                                                  vtune: Executing actions  0 % Finalizing results                               vtune: Executing actions  0 % Finalizing the result                            vtune: Executing actions  0 % Clearing the database                            vtune: Executing actions  7 % Clearing the database                            vtune: Executing actions  7 % Loading raw data to the database                 vtune: Executing actions  7 % Loading 'systemcollector-160047-node0.memcached.lvtune: Executing actions 12 % Loading 'systemcollector-160047-node0.memcached.lvtune: Executing actions 12 % Loading 'system-wide.perf' file                  vtune: Executing actions 12 % Loading 'system-wide.stat.perf' file             vtune: Executing actions 12 % Loading '160047-160093.0.trace' file             vtune: Executing actions 12 % Loading '160093-160271.0.trace' file             vtune: Executing actions 12 % Loading '160093-160271.1.trace' file             vtune: Executing actions 12 % Loading '160093-160271.2.trace' file             vtune: Executing actions 12 % Updating precomputed scalar metrics              vtune: Executing actions 14 % Updating precomputed scalar metrics              vtune: Executing actions 14 % Processing profile metrics and debug information vtune: Executing actions 19 % Processing profile metrics and debug information vtune: Executing actions 19 % Setting data model parameters                    vtune: Executing actions 19 % Resolving module symbols                         vtune: Executing actions 19 % Resolving information for `libevent-2.1.so.7.0.1'vtune: Executing actions 19 % Resolving information for `libssl.so.3'          
+vtune: Warning: Cannot locate debugging information for file `/usr/lib/x86_64-linux-gnu/libssl.so.3'.
+vtune: Warning: Cannot locate debugging information for file `/usr/lib/x86_64-linux-gnu/libevent-2.1.so.7.0.1'.
+vtune: Executing actions 19 % Resolving information for `memtier_benchmark'    vtune: Executing actions 19 % Resolving information for `pinbin'               
+vtune: Warning: Cannot locate file `/etc/ld.so.cache'.
+`/etc/ld.so.cache' has an unsupported or invalid file format. Contact Intel Technical Support.
+vtune: Executing actions 19 % Resolving information for `ld.so.cache'          vtune: Executing actions 19 % Resolving information for `linker'               vtune: Executing actions 19 % Resolving information for `libxed.so'            
+vtune: Warning: Cannot locate file `/usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug'.
+`/usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug' is missing the .text section with code. The file may be a symbol file and not a binary module.
+vtune: Executing actions 19 % Resolving information for `af96d7b1a6bad57b559d64vtune: Executing actions 19 % Resolving information for `libstdc++.so.6'       
+vtune: Warning: Cannot locate debugging information for file `/lib/x86_64-linux-gnu/libstdc++.so.6'.
+vtune: Executing actions 20 % Resolving information for `libstdc++.so.6'       
+vtune: Warning: Cannot locate file `/usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug'.
+`/usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug' is missing the .text section with code. The file may be a symbol file and not a binary module.
+vtune: Executing actions 20 % Resolving information for `7b0c955c3d81d7cac1501avtune: Executing actions 20 % Resolving information for `ipod.ko'              
+vtune: Warning: Cannot locate debugging information for file `/lib/modules/5.15.0-160-generic/updates/dkms/ipod.ko'.
+vtune: Warning: Cannot read load addresses of sections from `/sys/module/ipod/sections'. This may affect the correctness of symbol resolution for `/lib/modules/5.15.0-160-generic/updates/dkms/ipod.ko'. Make sure this directory exists and all files in this directory have read permissions.
+vtune: Executing actions 20 % Resolving information for `taskset'              
+vtune: Warning: Cannot locate debugging information for file `/usr/bin/taskset'.
+vtune: Executing actions 20 % Resolving information for `libcrypto.so.3'       vtune: Executing actions 20 % Resolving information for `libtpsstool.so'       
+vtune: Warning: Cannot locate debugging information for file `/usr/lib/x86_64-linux-gnu/libcrypto.so.3'.
+vtune: Warning: Cannot locate file `/usr/lib/debug/.build-id/b2/b4cd0f73a7c7a6da5ba4126bceb33ce68853d5.debug'.
+`/usr/lib/debug/.build-id/b2/b4cd0f73a7c7a6da5ba4126bceb33ce68853d5.debug' is missing the .text section with code. The file may be a symbol file and not a binary module.
+vtune: Executing actions 20 % Resolving information for `b4cd0f73a7c7a6da5ba412vtune: Executing actions 20 % Resolving information for `ld-linux-x86-64.so.2' 
+vtune: Warning: Cannot locate debugging information for file `/opt/intel/oneapi/vtune/2025.7/lib64/libtpsstool.so'.
+vtune: Warning: Cannot locate debugging information for file `/opt/intel/oneapi/vtune/2025.7/lib64/libtpsstool.so'.
+vtune: Executing actions 20 % Resolving information for `libc.so.6'            vtune: Executing actions 20 % Resolving information for `libevent-2.1.so.7'    
+vtune: Warning: Cannot locate debugging information for file `/lib/x86_64-linux-gnu/libevent-2.1.so.7'.
+vtune: Executing actions 20 % Resolving information for `libz.so.1'            
+vtune: Warning: Cannot locate debugging information for file `/lib/x86_64-linux-gnu/libz.so.1'.
+vtune: Executing actions 20 % Resolving information for `libpindwarf.so'       vtune: Executing actions 20 % Resolving information for `libdwarf.so'          vtune: Executing actions 21 % Resolving information for `libdwarf.so'          vtune: Executing actions 21 % Resolving information for `libc++abi.so'         vtune: Executing actions 21 % Resolving information for `libz.so.1.2.11'       
+vtune: Warning: Cannot locate debugging information for file `/usr/lib/x86_64-linux-gnu/libz.so.1.2.11'.
+vtune: Executing actions 21 % Resolving information for `ld-linux-x86-64.so.2' vtune: Executing actions 21 % Resolving information for `libc++.so'            vtune: Executing actions 21 % Resolving information for `time'                 
+vtune: Warning: Cannot locate debugging information for file `/usr/bin/time'.
+vtune: Executing actions 21 % Resolving information for `libc-dynamic.so'      vtune: Executing actions 21 % Resolving information for `libevent_core-2.1.so.7
+vtune: Warning: Cannot locate debugging information for file `/usr/lib/x86_64-linux-gnu/libevent_core-2.1.so.7.0.1'.
+vtune: Executing actions 21 % Resolving information for `libstdc++.so.6.0.30'  
+vtune: Warning: Cannot locate debugging information for file `/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30'.
+vtune: Executing actions 21 % Resolving information for dangling locations     vtune: Executing actions 22 % Resolving information for dangling locations     vtune: Executing actions 22 % Resolving information for `[vdso]'               vtune: Executing actions 22 % Resolving information for `libc.so.6'            vtune: Executing actions 22 % Resolving information for `vmlinux'              vtune: Executing actions 22 % Resolving bottom user stack information          vtune: Executing actions 23 % Resolving bottom user stack information          vtune: Executing actions 23 % Resolving thread name information                vtune: Executing actions 24 % Resolving thread name information                vtune: Executing actions 24 % Resolving call target names for dynamic code     vtune: Executing actions 25 % Resolving call target names for dynamic code     vtune: Executing actions 25 % Resolving interrupt name information             vtune: Executing actions 26 % Resolving interrupt name information             vtune: Executing actions 26 % Processing profile metrics and debug information vtune: Executing actions 27 % Processing profile metrics and debug information vtune: Executing actions 28 % Processing profile metrics and debug information vtune: Executing actions 29 % Processing profile metrics and debug information vtune: Executing actions 30 % Processing profile metrics and debug information vtune: Executing actions 31 % Processing profile metrics and debug information vtune: Executing actions 31 % Preparing output tree                            vtune: Executing actions 31 % Parsing columns in input tree                    vtune: Executing actions 32 % Parsing columns in input tree                    vtune: Executing actions 32 % Creating top-level columns                       vtune: Executing actions 32 % Creating top-level rows                          vtune: Executing actions 33 % Creating top-level rows                          vtune: Executing actions 33 % Preparing output tree                            vtune: Executing actions 33 % Parsing columns in input tree                    vtune: Executing actions 33 % Creating top-level columns                       vtune: Executing actions 34 % Creating top-level columns                       vtune: Executing actions 34 % Creating top-level rows                          vtune: Executing actions 35 % Creating top-level rows                          vtune: Executing actions 35 % Preparing output tree                            vtune: Executing actions 35 % Parsing columns in input tree                    vtune: Executing actions 35 % Creating top-level columns                       vtune: Executing actions 36 % Creating top-level columns                       vtune: Executing actions 36 % Creating top-level rows                          vtune: Executing actions 37 % Creating top-level rows                          vtune: Executing actions 37 % Preparing output tree                            vtune: Executing actions 37 % Parsing columns in input tree                    vtune: Executing actions 37 % Creating top-level columns                       vtune: Executing actions 38 % Creating top-level columns                       vtune: Executing actions 38 % Creating top-level rows                          vtune: Executing actions 39 % Creating top-level rows                          vtune: Executing actions 40 % Creating top-level rows                          vtune: Executing actions 40 % Preparing output tree                            vtune: Executing actions 40 % Parsing columns in input tree                    vtune: Executing actions 40 % Creating top-level columns                       vtune: Executing actions 41 % Creating top-level columns                       vtune: Executing actions 41 % Creating top-level rows                          vtune: Executing actions 42 % Creating top-level rows                          vtune: Executing actions 42 % Preparing output tree                            vtune: Executing actions 42 % Parsing columns in input tree                    vtune: Executing actions 42 % Creating top-level columns                       vtune: Executing actions 43 % Creating top-level columns                       vtune: Executing actions 43 % Creating top-level rows                          vtune: Executing actions 44 % Creating top-level rows                          vtune: Executing actions 44 % Preparing output tree                            vtune: Executing actions 44 % Parsing columns in input tree                    vtune: Executing actions 44 % Creating top-level columns                       vtune: Executing actions 45 % Creating top-level columns                       vtune: Executing actions 45 % Creating top-level rows                          vtune: Executing actions 46 % Creating top-level rows                          vtune: Executing actions 46 % Preparing output tree                            vtune: Executing actions 46 % Parsing columns in input tree                    vtune: Executing actions 46 % Creating top-level columns                       vtune: Executing actions 46 % Creating top-level rows                          vtune: Executing actions 47 % Creating top-level rows                          vtune: Executing actions 47 % Preparing output tree                            vtune: Executing actions 47 % Parsing columns in input tree                    vtune: Executing actions 48 % Parsing columns in input tree                    vtune: Executing actions 48 % Creating top-level columns                       vtune: Executing actions 48 % Creating top-level rows                          vtune: Executing actions 49 % Creating top-level rows                          vtune: Executing actions 49 % Preparing output tree                            vtune: Executing actions 49 % Parsing columns in input tree                    vtune: Executing actions 49 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Preparing output tree                            vtune: Executing actions 50 % Parsing columns in input tree                    vtune: Executing actions 50 % Creating top-level columns                       vtune: Executing actions 50 % Creating top-level rows                          vtune: Executing actions 50 % Setting data model parameters                    vtune: Executing actions 50 % Precomputing frequently used data                vtune: Executing actions 50 % Precomputing frequently used data                vtune: Executing actions 50 % Updating precomputed scalar metrics              vtune: Executing actions 50 % Discarding redundant overtime data               vtune: Executing actions 50 % Saving the result                                vtune: Executing actions 50 % Generating a report                              vtune: Executing actions 50 % Setting data model parameters                    vtune: Executing actions 75 % Setting data model parameters                    vtune: Executing actions 75 % Generating a report                              Elapsed Time: 16.900s
+    CPU Time: 30.745s
+    Memory Bound: 5.1% of Pipeline Slots
+        L1 Bound: 8.9% of Clockticks
+        L2 Bound: 1.3% of Clockticks
+        L3 Bound: 3.6% of Clockticks
+        DRAM Bound: 0.6% of Clockticks
+            DRAM Bandwidth Bound: 0.0% of Elapsed Time
+        Store Bound: 0.5% of Clockticks
+        NUMA: % of Remote Accesses: 0.0%
+        UPI Utilization Bound: 0.0% of Elapsed Time
+    Loads: 18,784,345,035
+    Stores: 13,896,733,547
+    LLC Miss Count: 0
+        Local Memory Access Count: 0
+        Remote Memory Access Count: 0
+        Remote Cache Access Count: 0
+    Total Memory Traffic, GB: 3.742
+        Read Traffic from Local Memory, GB: 0.628
+        Read Traffic from Remote Memory, GB: 0.000
+        Read Traffic from Sub-NUMA Memory, GB: 0.000
+        Write Memory Traffic, GB: 3.114
+    Average Latency (cycles): 9
+    Total Thread Count: 44
+    Paused Time: 0s
+
+Bandwidth Utilization
+Bandwidth Domain                  Platform Maximum  Observed Maximum  Average  % of Elapsed Time with High BW Utilization(%)
+--------------------------------  ----------------  ----------------  -------  ---------------------------------------------
+DRAM, GB/sec                      268                         11.100    2.904                                           0.0%
+DRAM Single-Package, GB/sec       134                         10.900    2.764                                           0.0%
+UPI Utilization Single-link, (%)  100                          3.000    0.054                                           0.0%
+
+Top Memory Objects by Latency
+Memory Object                                   Total Latency           Loads         Stores  LLC Miss Count
+----------------------------------------------  -------------  --------------  -------------  --------------
+[Unknown]                                             60.848%  12,990,515,068  9,866,394,452               0
+[vmlinux]                                             26.511%   3,741,308,028  3,507,279,844               0
+[libtpsstool.so]                                       2.191%     469,981,567              0               0
+[ld.so.cache]                                          2.047%     644,538,689    161,829,471               0
+[b4cd0f73a7c7a6da5ba4126bceb33ce68853d5.debug]         1.421%     149,235,090    142,020,098               0
+[Unknown]                                              6.983%     788,766,593    219,209,682               0
+Collection and Platform Info
+    Application Command Line: /usr/bin/time "-v" "taskset" "-c" "2-3" "memtier_benchmark" "--port" "6500" "--test-time=15" "--clients" "30" "--threads" "4" "--pipeline" "1" "--random-data" "--data-size-range=4-2048" "--data-size-pattern=R" "--key-maximum=100000000" "--ratio=1:1" "--hide-histogram" "--out-file=/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/redis.out" "--hdr-file-prefix=/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/latency.out" 
+    Operating System: 5.15.0-160-generic DISTRIB_ID=Ubuntu DISTRIB_RELEASE=22.04 DISTRIB_CODENAME=jammy DISTRIB_DESCRIPTION="Ubuntu 22.04.2 LTS"
+    Computer Name: node0.memcached.lsm-pg0.wisc.cloudlab.us
+    Result Size: 284.1 MB 
+    Collection start time: 03:21:56 08/12/2025 UTC
+    Collection stop time: 03:22:12 08/12/2025 UTC
+    Collector Type: Driverless Perf system-wide sampling,User-mode sampling and tracing
+    CPU
+        Name: Intel(R) Xeon(R) Processor code named Icelake
+        Frequency: 2.400 GHz
+        Logical CPU Count: 64
+        Max DRAM Single-Package Bandwidth: 134.000 GB/s
+        LLC size: 25.2 MB 
+        Cache Allocation Technology
+            Level 2 capability: not detected
+            Level 3 capability: available
+
+If you want to skip descriptions of detected performance issues in the report,
+enter: vtune -report summary -report-knob show-issues=false -r <my_result_dir>.
+Alternatively, you may view the report in the csv format: vtune -report
+<report_name> -format=csv.
+vtune: Executing actions 100 % Generating a report                             vtune: Executing actions 100 % done                                            
+Done. Output: /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_2/pair_0/clients_30_threads_4_pipeline_1/redis.out

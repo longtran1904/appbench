@@ -1,0 +1,41 @@
+==> starting MEMCACHED-server on 127.0.0.1:11211
+Printing server log to: /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/server.log
+==> MEMCACHED-server: taskset -c 0-7  memcached -p 11211 -u lht21 -t 8 -vv > /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/server.log 2>&1 &
+[SERVER PID]: 183943
+==> starting memtier_benchmark /usr/bin/time -v taskset -c 8-15 memtier_benchmark --port 11211 --test-time=15     --clients 50 --threads 8 --pipeline 1     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=100000000     --ratio=5:1 --hide-histogram     --out-file=/mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/memcached.out --hdr-file-prefix=/mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/latency.out 2>&1 &
+[MEMTIER PID]: 183983
+Writing results to /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/memcached.out...
+[RUN #1] Preparing benchmark client...
+[RUN #1] Launching threads now...
+[RUN #1 7%,   0 secs]  8 threads 50 conns:      998233 ops,  998374 (avg:  998374) ops/sec, 864.74MB/sec (avg: 864.74MB/sec),  0.40 (avg:  0.40) msec latency[RUN #1 13%,   1 secs]  8 threads 50 conns:     1644531 ops,  646215 (avg:  822271) ops/sec, 563.74MB/sec (avg: 714.22MB/sec),  0.62 (avg:  0.49) msec latency[RUN #1 20%,   3 secs]  8 threads 50 conns:     2039297 ops,  394703 (avg:  679733) ops/sec, 337.96MB/sec (avg: 588.78MB/sec),  1.01 (avg:  0.59) msec latency[RUN #1 27%,   4 secs]  8 threads 50 conns:     2699010 ops,  659507 (avg:  674675) ops/sec, 563.63MB/sec (avg: 582.49MB/sec),  0.61 (avg:  0.59) msec latency[RUN #1 33%,   5 secs]  8 threads 50 conns:     3748581 ops, 1049414 (avg:  749625) ops/sec, 908.43MB/sec (avg: 647.68MB/sec),  0.38 (avg:  0.53) msec latency[RUN #1 40%,   6 secs]  8 threads 50 conns:     4766883 ops, 1018162 (avg:  794382) ops/sec, 876.29MB/sec (avg: 685.79MB/sec),  0.39 (avg:  0.50) msec latency[RUN #1 47%,   7 secs]  8 threads 50 conns:     5651032 ops,  884038 (avg:  807190) ops/sec, 770.32MB/sec (avg: 697.86MB/sec),  0.45 (avg:  0.50) msec latency[RUN #1 53%,   8 secs]  8 threads 50 conns:     6627315 ops,  976163 (avg:  828311) ops/sec, 836.51MB/sec (avg: 715.19MB/sec),  0.41 (avg:  0.48) msec latency[RUN #1 60%,   9 secs]  8 threads 50 conns:     7607232 ops,  979789 (avg:  845142) ops/sec, 837.35MB/sec (avg: 728.77MB/sec),  0.41 (avg:  0.47) msec latency[RUN #1 67%,  10 secs]  8 threads 50 conns:     8652025 ops, 1044668 (avg:  865095) ops/sec, 916.11MB/sec (avg: 747.50MB/sec),  0.38 (avg:  0.46) msec latency[RUN #1 73%,  11 secs]  8 threads 50 conns:     9696975 ops, 1044823 (avg:  881434) ops/sec, 904.73MB/sec (avg: 761.79MB/sec),  0.38 (avg:  0.45) msec latency[RUN #1 80%,  12 secs]  8 threads 50 conns:    10740361 ops, 1043266 (avg:  894920) ops/sec, 894.50MB/sec (avg: 772.85MB/sec),  0.38 (avg:  0.45) msec latency[RUN #1 87%,  13 secs]  8 threads 50 conns:    11786162 ops, 1045676 (avg:  906516) ops/sec, 897.97MB/sec (avg: 782.48MB/sec),  0.38 (avg:  0.44) msec latency[RUN #1 93%,  14 secs]  8 threads 50 conns:    12831596 ops, 1045308 (avg:  916430) ops/sec, 890.12MB/sec (avg: 790.16MB/sec),  0.38 (avg:  0.44) msec latency[RUN #1 100%,  15 secs]  8 threads 50 conns:    13878044 ops, 1046620 (avg:  925107) ops/sec, 888.05MB/sec (avg: 796.69MB/sec),  0.38 (avg:  0.43) msec latency[RUN #1 100%,  15 secs]  0 threads 50 conns:    13878328 ops, 1046620 (avg:  925016) ops/sec, 888.05MB/sec (avg: 796.61MB/sec),  0.38 (avg:  0.43) msec latency
+
+Writing Full Run command HDR latency histogram results to /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/latency.out_FULL_RUN_1.txt...
+Writing Full Run command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/latency.out_FULL_RUN_1.hgrm...
+Writing GET command HDR latency histogram results to /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/latency.out_GET_command_run_1.txt...
+Writing GET command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/latency.out_GET_command_run_1.hgrm...
+Writing SET command HDR latency histogram results to /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/latency.out_SET_command_run_1.txt...
+Writing SET command HDR latency histogram results in HistogramLogProcessor format to /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/latency.out_SET_command_run_1.hgrm...
+	Command being timed: "taskset -c 8-15 memtier_benchmark --port 11211 --test-time=15 --protocol memcache_binary --clients 50 --threads 8 --pipeline 1 --random-data --data-size-range=4-2048 --data-size-pattern=R --key-maximum=100000000 --ratio=5:1 --hide-histogram --out-file=/mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/memcached.out --hdr-file-prefix=/mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/latency.out"
+	User time (seconds): 26.46
+	System time (seconds): 78.01
+	Percent of CPU this job got: 649%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:16.09
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 90188
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 21
+	Minor (reclaiming a frame) page faults: 101468
+	Voluntary context switches: 677934
+	Involuntary context switches: 5085
+	Swaps: 0
+	File system inputs: 2512
+	File system outputs: 128
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Done. Output: /mnt/appbench/experiments/memcached_contention/test_memory_bound/loaded_pairs_0/pair_0/clients_50_threads_8_pipeline_1/memcached.out

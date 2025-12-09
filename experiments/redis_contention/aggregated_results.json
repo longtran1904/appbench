@@ -1,201 +1,63 @@
 {
   "metadata": {
     "experiment": "redis_contention",
-    "total_configurations": 28,
-    "data_source": "redis_multi/pair_0",
+    "total_configurations": 8,
+    "data_source": "redis_contention_2",
     "metrics": [
       "throughput_ops_sec",
-      "avg_latency_ms"
+      "avg_latency_ms",
+      "p99_latency_ms",
+      "p99_9_latency_ms"
     ]
   },
   "configurations": {
-    "clients_1": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 144220.98,
-          "avg_latency_ms": 0.02734
-        }
-      }
+    "loaded_pairs_0": {
+      "throughput_ops_sec": 78368.67,
+      "avg_latency_ms": 0.05116,
+      "p99_latency_ms": 0.079,
+      "p99_9_latency_ms": 2.447
     },
-    "clients_10": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 202690.45,
-          "avg_latency_ms": 0.21136
-        }
-      }
+    "loaded_pairs_1": {
+      "throughput_ops_sec": 78926.62,
+      "avg_latency_ms": 0.05083,
+      "p99_latency_ms": 0.079,
+      "p99_9_latency_ms": 2.447
     },
-    "clients_20": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 206589.88,
-          "avg_latency_ms": 0.4148
-        }
-      }
+    "loaded_pairs_2": {
+      "throughput_ops_sec": 78382.77,
+      "avg_latency_ms": 0.05116,
+      "p99_latency_ms": 0.079,
+      "p99_9_latency_ms": 2.447
     },
-    "clients_30": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 196019.15,
-          "avg_latency_ms": 0.61208
-        }
-      }
+    "loaded_pairs_3": {
+      "throughput_ops_sec": 78328.96,
+      "avg_latency_ms": 0.05118,
+      "p99_latency_ms": 0.079,
+      "p99_9_latency_ms": 2.431
     },
-    "clients_40": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 197303.09,
-          "avg_latency_ms": 0.81097
-        }
-      }
+    "loaded_pairs_4": {
+      "throughput_ops_sec": 78063.69,
+      "avg_latency_ms": 0.05134,
+      "p99_latency_ms": 0.087,
+      "p99_9_latency_ms": 2.447
     },
-    "clients_50": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 179909.92,
-          "avg_latency_ms": 1.11139
-        }
-      },
-      "threads_6": {
-        "pipeline_1": {
-          "throughput_ops_sec": 178168.11,
-          "avg_latency_ms": 1.68322
-        }
-      },
-      "threads_8": {
-        "pipeline_1": {
-          "throughput_ops_sec": 171265.28,
-          "avg_latency_ms": 2.33441
-        }
-      },
-      "threads_10": {
-        "pipeline_1": {
-          "throughput_ops_sec": 164668.89,
-          "avg_latency_ms": 3.03476
-        }
-      },
-      "threads_12": {
-        "pipeline_1": {
-          "throughput_ops_sec": 157108.38,
-          "avg_latency_ms": 3.81716
-        }
-      }
+    "loaded_pairs_6": {
+      "throughput_ops_sec": 45241.27,
+      "avg_latency_ms": 0.08812,
+      "p99_latency_ms": 0.143,
+      "p99_9_latency_ms": 4.831
     },
-    "clients_100": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 200539.64,
-          "avg_latency_ms": 1.99428
-        }
-      },
-      "threads_6": {
-        "pipeline_1": {
-          "throughput_ops_sec": 188022.63,
-          "avg_latency_ms": 3.19029
-        }
-      },
-      "threads_8": {
-        "pipeline_1": {
-          "throughput_ops_sec": 179511.88,
-          "avg_latency_ms": 4.45586
-        }
-      },
-      "threads_10": {
-        "pipeline_1": {
-          "throughput_ops_sec": 166406.51,
-          "avg_latency_ms": 6.00888
-        }
-      },
-      "threads_12": {
-        "pipeline_1": {
-          "throughput_ops_sec": 154816.07,
-          "avg_latency_ms": 7.7471
-        }
-      }
+    "loaded_pairs_7": {
+      "throughput_ops_sec": 45209.26,
+      "avg_latency_ms": 0.08808,
+      "p99_latency_ms": 0.143,
+      "p99_9_latency_ms": 4.863
     },
-    "clients_200": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 195687.22,
-          "avg_latency_ms": 4.0881
-        }
-      },
-      "threads_6": {
-        "pipeline_1": {
-          "throughput_ops_sec": 177355.68,
-          "avg_latency_ms": 6.76384
-        }
-      },
-      "threads_8": {
-        "pipeline_1": {
-          "throughput_ops_sec": 161745.72,
-          "avg_latency_ms": 9.88289
-        }
-      },
-      "threads_10": {
-        "pipeline_1": {
-          "throughput_ops_sec": 149722.52,
-          "avg_latency_ms": 13.34885
-        }
-      },
-      "threads_12": {
-        "pipeline_1": {
-          "throughput_ops_sec": 139683.08,
-          "avg_latency_ms": 17.17556
-        }
-      }
-    },
-    "clients_400": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 170132.47,
-          "avg_latency_ms": 9.40436
-        }
-      },
-      "threads_6": {
-        "pipeline_1": {
-          "throughput_ops_sec": 146740.34,
-          "avg_latency_ms": 16.35254
-        }
-      },
-      "threads_8": {
-        "pipeline_1": {
-          "throughput_ops_sec": 134133.15,
-          "avg_latency_ms": 23.85228
-        }
-      },
-      "threads_10": {
-        "pipeline_1": {
-          "throughput_ops_sec": 124920.24,
-          "avg_latency_ms": 32.0058
-        }
-      },
-      "threads_12": {
-        "pipeline_1": {
-          "throughput_ops_sec": 118984.54,
-          "avg_latency_ms": 40.3062
-        }
-      }
-    },
-    "clients_1024": {
-      "threads_4": {
-        "pipeline_1": {
-          "throughput_ops_sec": 130325.32,
-          "avg_latency_ms": 31.38008
-        }
-      },
-      "threads_6": {
-        "pipeline_1": {
-          "throughput_ops_sec": 104518.32,
-          "avg_latency_ms": 58.67861
-        }
-      },
-      "threads_8": {
-        "pipeline_1": {
-          "throughput_ops_sec": 96288.77,
-          "avg_latency_ms": 89.29714
-        }
-      }
+    "loaded_pairs_9": {
+      "throughput_ops_sec": 44014.68,
+      "avg_latency_ms": 0.0905,
+      "p99_latency_ms": 0.151,
+      "p99_9_latency_ms": 4.927
     }
   }
 }

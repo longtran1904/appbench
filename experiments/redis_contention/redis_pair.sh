@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+set -x
 
 # --- paths (change via env or keep defaults) ---
 CODEBASE="${CODEBASE:-$APPBENCH}"
@@ -24,12 +25,12 @@ LOADED_PAIRS="${LOADED_PAIRS:-0}"
 
 # Honor REDIS_PORT first, then PORT, fall back to 6500
 REDIS_PORT="${REDIS_PORT:-${PORT:-6500}}"
-REDIS_TESTTIME="${REDIS_TESTTIME:-15}"       # seconds
+REDIS_TESTTIME="${REDIS_TESTTIME:-60}"       # seconds
 REDIS_DATASIZE_RANGE="${REDIS_DATASIZE_RANGE:-4-2048}" # bytes
 REDIS_DATASIZE_PATTERN="${REDIS_DATASIZE_PATTERN:-R}"  
 REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-100000000}"
 REDIS_KEY_PATTERN="${REDIS_KEY_PATTERN:-R:R}"
-REDIS_RATIO="${REDIS_RATIO:-1:1}"           # read:set ratio
+REDIS_RATIO="${REDIS_RATIO:-5:1}"           # SET:GET ratio
 REDIS_OUTPUT="${REDIS_OUTPUT:-$OUTPUT/redis.out}"
 REDIS_HISTOGRAM_FILE="${REDIS_HISTOGRAM_FILE:-$OUTPUT/latency.out}"
 SERVER_LOG="${SERVER_LOG:-$OUTPUT/server.log}"
@@ -49,16 +50,48 @@ flush # Flush page cache
 # start server in foreground, background the process; capture PID
 echo "Printing server log to: $SERVER_LOG"
 echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no >$SERVER_LOG 2>&1 &"
-${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
-  --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
-SRV_PID=$!
-echo "[SERVER PID]: $SRV_PID"
 
-# wait until it answers PING (max ~10s)
-for i in {1..50}; do
-  "$REDIS_CLI" -h "$HOST" -p "$REDIS_PORT" PING >/dev/null 2>&1 && break
-  sleep 0.2
+# mkdir -p "$APPBENCH/vtune_projects/redis_O3"
+
+rm -f "$READY_FLAG" 2>/dev/null || true
+
+vtune -collect memory-access -result-dir "$APPBENCH/vtune_projects/redis_contention_3/redis_clients_${CLIENTS}_threads_${THREADS}_loaded_pairs_$LOADED_PAIRS" \
+    -knob analyze-mem-objects=true \
+    -finalization-mode=full \
+    -search-dir="/usr/lib/debug/boot" \
+    -- ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
+        --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
+
+# ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
+#     --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
+
+# wait until it answers PING (max ~20s)
+for i in {1..100}; do
+    if "$REDIS_CLI" -h "$HOST" -p "$REDIS_PORT" PING >/dev/null 2>&1; then
+        READY=1
+        echo "[INFO] Redis is ready on $HOST:$REDIS_PORT (after $((i * 200)) ms)"
+        echo "READY" > "${READY_FLAG}"
+        break
+    fi
+    sleep 0.2
 done
+
+if [ "$READY" -ne 1 ]; then
+    echo "[ERROR] Redis on $HOST:$REDIS_PORT did NOT respond to PING after $((MAX_WAIT * 200)) ms" >&2
+    echo "[ERROR] Check server log: $SERVER_LOG" >&2
+    # Optional: show last few lines to make debugging easier
+    if [ -f "$SERVER_LOG" ]; then
+        echo "---- tail $SERVER_LOG ----" >&2
+        tail -n 20 "$SERVER_LOG" >&2 || true
+        echo "--------------------------" >&2
+    fi
+    exit 1
+fi
+
+VTUNE_PID=$(pgrep -f "vtune -collect memory-access")
+VTUNE_CHILD_PID=$(pgrep -P "$VTUNE_PID")
+SRV_PID=$(pgrep -a -P "$VTUNE_CHILD_PID" redis-server | awk '{print $1}')
+echo "[SERVER PID]: $SRV_PID"
 
 echo "==> starting memtier_benchmark ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
     --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
@@ -67,18 +100,19 @@ echo "==> starting memtier_benchmark ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_
     --ratio="$REDIS_RATIO" --hide-histogram \
     --out-file="$REDIS_OUTPUT" --hdr-file-prefix="$REDIS_HISTOGRAM_FILE" 2>&1 &"
 
-    vtune -collect memory-access -result-dir "$APPBENCH/vtune_projects/redis_mem_access_loaded_$LOADED_PAIRS" \
-    -knob analyze-mem-objects=true \
-    -- ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
-        --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
-        --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
-        --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \
-        --ratio="$REDIS_RATIO" --hide-histogram \
-        --out-file="$REDIS_OUTPUT" --hdr-file-prefix="$REDIS_HISTOGRAM_FILE" 2>&1 &
+${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
+  --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
+  --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
+  --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \
+  --ratio="$REDIS_RATIO" --hide-histogram \
+  --out-file="$REDIS_OUTPUT" --hdr-file-prefix="$REDIS_HISTOGRAM_FILE" 2>&1 &
 MEMTIER_PID=$!
 echo "[MEMTIER PID]: $MEMTIER_PID"
 
 wait "$MEMTIER_PID" 2>/dev/null || true
 kill "$SRV_PID" >/dev/null 2>&1 || true
 wait "$SRV_PID" 2>/dev/null || true
+wait "$VTUNE_PID" 2>/dev/null || true
 echo "Done. Output: $REDIS_OUTPUT"
+
+set -x

@@ -1,0 +1,5 @@
+#[SET command HDR latency histogram results]
+#[Histogram log format version 1.2]
+#[StartTime: 1765152863.389 (seconds since epoch), Mon Dec 00:14:23 GMT 2025]
+"StartTimestamp","EndTimestamp","Interval_Max","Interval_Compressed_Histogram"
+1765152863.389,1765152878.390,8767.0,HISTFAAAAN94nC2NP0tDUQzFb847Ly+9xFr8gxVEkHZw0E06dHHTb9JPIg9xdesqODnoKiqiIH4BV+mioJM4CAUH82xzc3OSA79k4+h0OaX0lmaBueam9B4P0v7XzChwyV87PqkmN1vfn63nw8mV1C+4uC3qM/np3vGpGuf38lUG/W3v0mAgi1CKKgXEIgqsIwrk/y0Aq9pe2Rvdyzmu8SBjqWW40990NQ3I3dwygy3jG0sEyQCBSqnRsFkDZsYpJSKb0DjdSOwIKzxdgnnHSMva8ba7hsRIsUBa2MVU8CFYwx+lMyH6

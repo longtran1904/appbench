@@ -46,6 +46,9 @@ sudo apt-get -y install libevent-dev
 sudo apt-get -y install pkg-config
 sudo apt-get -y install zlib1g-dev
 sudo apt-get -y install linux-tools-common linux-tools-generic linux-tools-$(uname -r)
+
+sudo apt install -y python3-pip
+sudo pip3 install matplotlib
 }
 
 DOWNLOAD_VTUNE(){
@@ -70,6 +73,6 @@ DOWNLOAD_VTUNE(){
     echo 0 | sudo tee /proc/sys/kernel/kptr_restrict
 }
 
-INSTALL_SYSTEM_LIBS
+# INSTALL_SYSTEM_LIBS
 DOWNLOAD_VTUNE
 

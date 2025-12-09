@@ -1,0 +1,7 @@
+==> starting redis-server on 127.0.0.1:6509
+Printing server log to: /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_9/pair_9/clients_30_threads_4_pipeline_1/server.log
+==> redis-server: taskset -c 45 /mnt/appbench/redis-3.0.0/src/redis-server /mnt/appbench/redis-3.0.0/redis.conf --bind 127.0.0.1 --port 6509 --daemonize no >/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_9/pair_9/clients_30_threads_4_pipeline_1/server.log 2>&1 &
+[SERVER PID]: 163875
+==> starting memtier_benchmark /usr/bin/time -v taskset -c 46-47 memtier_benchmark --port 6509 --test-time=15     --clients 256 --threads 4 --pipeline 10     --random-data --data-size-range=4-2048     --data-size-pattern=R --key-maximum=100000000     --ratio=1:1 --hide-histogram     --out-file=/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_9/pair_9/clients_30_threads_4_pipeline_1/redis.out --hdr-file-prefix=/mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_9/pair_9/clients_30_threads_4_pipeline_1/latency.out 2>&1 &
+[MEMTIER PID]: 163931
+Done. Output: /mnt/appbench/experiments/redis_contention/throughput_multipairs_kdebug/loaded_pairs_9/pair_9/clients_30_threads_4_pipeline_1/redis.out

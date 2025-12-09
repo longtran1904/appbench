@@ -89,7 +89,7 @@ add_task "INSTALL_SHAREDLIB_mmap_lib" \
 # "cd \"$BASE/redis-3.0.0/src\" && make distclean >/dev/null 2>&1 || true && make clean && make IGNORE_MISSING_DEPS=1 -j\"$JOBS\" all"
 
 add_task "redis-3.0.0_debug" \
-"cd \"$BASE/redis-3.0.0/src\" && make distclean >/dev/null 2>&1 || true && make clean && make CFLAGS='-g -O2 -fno-omit-frame-pointer' IGNORE_MISSING_DEPS=1 -j\"$JOBS\" all"
+"cd \"$BASE/redis-3.0.0/src\" && make distclean >/dev/null 2>&1 || true && make clean && make CFLAGS='-g -O3 -fno-omit-frame-pointer' IGNORE_MISSING_DEPS=1 -j\"$JOBS\" all"
 
 add_task "memtier_benchmark" \
 "cd \"$BASE/memtier_benchmark\" && autoreconf -ivf && ./configure && make clean && make -j\"$JOBS\" && sudo make install"

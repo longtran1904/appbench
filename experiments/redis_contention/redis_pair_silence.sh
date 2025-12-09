@@ -15,13 +15,13 @@ FLUSH="${FLUSH:-1}"               # set FLUSH=1 to drop caches (needs sudo)
 # KEY/DATASIZE patterns: R=random, S=sequential, G=Gaussian, Z=zipfian
 HOST="${HOST:-127.0.0.1}"
 # Performance params
-CLIENTS="${CLIENTS:-1024}"
+CLIENTS="${CLIENTS:-32}"
 THREADS="${THREADS:-4}"
-PIPELINE="${PIPELINE:-10}"
+PIPELINE="${PIPELINE:-100}"
 
 # Honor REDIS_PORT first, then PORT, fall back to 6500
 REDIS_PORT="${REDIS_PORT:-${PORT:-6500}}"
-REDIS_TESTTIME="${REDIS_TESTTIME:-15}"       # seconds
+REDIS_TESTTIME="${REDIS_TESTTIME:-60}"       # seconds
 REDIS_DATASIZE_RANGE="${REDIS_DATASIZE_RANGE:-4-2048}" # bytes
 REDIS_DATASIZE_PATTERN="${REDIS_DATASIZE_PATTERN:-R}"  
 REDIS_KEY_MAXIMUM="${REDIS_KEY_MAXIMUM:-100000000}"
@@ -48,13 +48,14 @@ echo "Printing server log to: $SERVER_LOG"
 echo "==> redis-server: ${REDIS_PREFIX:+$REDIS_PREFIX }$REDIS_SERVER ${REDIS_CONF:+$REDIS_CONF} --bind $HOST --port $REDIS_PORT --daemonize no >$SERVER_LOG 2>&1 &"
 ${REDIS_PREFIX:+$REDIS_PREFIX }"$REDIS_SERVER" ${REDIS_CONF:+$REDIS_CONF} \
   --bind "$HOST" --port "$REDIS_PORT" --daemonize no > "$SERVER_LOG" 2>&1 &
+
 SRV_PID=$!
 echo "[SERVER PID]: $SRV_PID"
 
-# wait until it answers PING (max ~10s)
-for i in {1..50}; do
-  "$REDIS_CLI" -h "$HOST" -p "$REDIS_PORT" PING >/dev/null 2>&1 && break
-  sleep 0.2
+# wait for READY_FLAG file to have content
+echo "waiting for READY_FLAG: ${READY_FLAG:-}"
+while [ ! -s "${READY_FLAG:-}" ]; do
+  sleep 0.1
 done
 
 echo "==> starting memtier_benchmark ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test-time="$REDIS_TESTTIME" \
@@ -68,11 +69,12 @@ ${MEMTIER_PREFIX:+$MEMTIER_PREFIX }memtier_benchmark --port "$REDIS_PORT" --test
   --clients "$CLIENTS" --threads "$THREADS" --pipeline "$PIPELINE" \
   --random-data --data-size-range="$REDIS_DATASIZE_RANGE" \
   --data-size-pattern="$REDIS_DATASIZE_PATTERN" --key-maximum="$REDIS_KEY_MAXIMUM" \
-  --ratio="$REDIS_RATIO" --hide-histogram > /dev/null 2>&1 &
+  --ratio="$REDIS_RATIO" --hide-histogram 2>&1 &
 MEMTIER_PID=$!
 echo "[MEMTIER PID]: $MEMTIER_PID"
 
 wait "$MEMTIER_PID" 2>/dev/null || true
 kill "$SRV_PID" >/dev/null 2>&1 || true
 wait "$SRV_PID" 2>/dev/null || true
+wait "$VTUNE_PID" 2>/dev/null || true
 echo "Done. Output: $REDIS_OUTPUT"
